@@ -12,26 +12,27 @@
    (glass, glows, gradient borders, buttons) is token-driven.
    ============================================================ */
 :root {
-  --bg: #05060a; /* deep premium near-black, a hair cool for depth */
-  --bg-2: #080a10;
-  --surface: #0d1017;
-  --surface-2: #14181f;
-  --surface-3: #1b2029;
+  --bg: #08070e; /* deep premium near-black with a cool violet undertone */
+  --bg-2: #0c0b16;
+  --surface: #12111c;
+  --surface-2: #191826;
+  --surface-3: #221f33;
   --border: rgba(255, 255, 255, 0.075);
-  --border-strong: rgba(255, 255, 255, 0.14);
-  --text: #f3f5f7;
-  --text-muted: #97a0ad;
-  --text-dim: #626b78;
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --text: #f4f3f8;
+  --text-muted: #a3a0b5;
+  --text-dim: #6c6984;
 
-  /* Brand — emerald primary, driving the logo AND the UI accent. */
-  --brand: #24e5a6;
-  --brand-hi: #6bffd1;
-  --brand-lo: #10c78d;
-  --accent: #24e5a6; /* === --brand: CTAs, links, pulses, focus */
-  --accent-2: #2ad6d0; /* luminous teal — secondary glows / gradient depth */
-  --accent-3: #7c74ff; /* violet — tertiary aurora depth only, used sparingly */
+  /* Brand — electric violet primary, driving the logo AND the UI accent.
+     Deliberately NOT emerald: a distinct AI-bot identity. */
+  --brand: #7c4dff;
+  --brand-hi: #a98bff;
+  --brand-lo: #5a2fe0;
+  --accent: #7c4dff; /* === --brand: CTAs, links, pulses, focus */
+  --accent-2: #22d3ee; /* electric cyan — secondary glows / gradient depth */
+  --accent-3: #ff5cc8; /* magenta — tertiary aurora depth, used sparingly */
 
-  --red: #ff7a7a;
+  --red: #ff6b8a;
   --amber: #ffce54;
   --radius: 22px;
   --radius-lg: 28px;
@@ -41,7 +42,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 
   /* Signature brand gradients reused across marks, borders and text. */
-  --grad-brand: linear-gradient(135deg, var(--brand-hi) 0%, var(--brand) 42%, var(--accent-2) 100%);
+  --grad-brand: linear-gradient(135deg, var(--brand-hi) 0%, var(--brand) 45%, var(--accent-2) 100%);
   --grad-aurora: conic-gradient(
     from 210deg at 50% 50%,
     color-mix(in srgb, var(--accent) 65%, transparent),
@@ -225,9 +226,9 @@
     color: transparent;
   }
 
-  /* Premium sheen for large display headings — white top → mint bottom. */
+  /* Premium sheen for large display headings — white top → soft violet bottom. */
   .headline-sheen {
-    background: linear-gradient(178deg, #ffffff 8%, #cdf5e8 62%, #7fe6cf 100%);
+    background: linear-gradient(178deg, #ffffff 8%, #e4dbff 60%, #b9a3ff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

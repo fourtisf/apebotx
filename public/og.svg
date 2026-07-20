@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#05060a"/>
+  <rect width="1200" height="630" fill="#08070e"/>
   <!-- glows -->
-  <circle cx="140" cy="60" r="340" fill="#24e5a6" opacity="0.11"/>
-  <circle cx="1140" cy="120" r="360" fill="#2ad6d0" opacity="0.09"/>
+  <circle cx="140" cy="60" r="340" fill="#7c4dff" opacity="0.11"/>
+  <circle cx="1140" cy="120" r="360" fill="#22d3ee" opacity="0.09"/>
   <!-- subtle grid -->
   <g stroke="#ffffff" stroke-opacity="0.05">
     <path d="M0 157.5 H1200 M0 315 H1200 M0 472.5 H1200"/>
@@ -11,9 +11,9 @@
   <!-- mark + kicker -->
   <defs>
     <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#6bffd1"/>
-      <stop offset="0.55" stop-color="#24e5a6"/>
-      <stop offset="1" stop-color="#2ad6d0"/>
+      <stop offset="0" stop-color="#a98bff"/>
+      <stop offset="0.55" stop-color="#7c4dff"/>
+      <stop offset="1" stop-color="#22d3ee"/>
     </linearGradient>
     <filter id="g" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.85" result="bl"/>
@@ -28,11 +28,11 @@
       <circle cx="16" cy="6.4" r="2.15" fill="url(#b)"/>
     </g>
   </g>
-  <text x="208" y="158" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="26" letter-spacing="6" fill="#9fe9d5">SMART-MONEY BOT · SOLANA · TELEGRAM + X</text>
+  <text x="208" y="158" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="26" letter-spacing="6" fill="#c9bcff">SMART-MONEY BOT · SOLANA · TELEGRAM + X</text>
   <text x="200" y="196" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="24" letter-spacing="2" fill="#f3f5f7" font-weight="600">ApeBotX</text>
   <!-- headline -->
   <text x="96" y="360" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="80" font-weight="700" fill="#f3f5f7">Automate the smartest</text>
-  <text x="96" y="452" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="80" font-weight="700" fill="#f3f5f7">money on <tspan fill="#24e5a6">Solana.</tspan></text>
+  <text x="96" y="452" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="80" font-weight="700" fill="#f3f5f7">money on <tspan fill="#7c4dff">Solana.</tspan></text>
   <!-- sub -->
   <text x="96" y="520" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="28" fill="#97a0ad">Segmented wallets · anti-rug fused · real-time alerts on Telegram &amp; X</text>
   <!-- footer -->

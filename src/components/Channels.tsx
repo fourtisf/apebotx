@@ -63,7 +63,7 @@ export function Channels() {
                       }}
                     />
                     <div className="relative flex items-center justify-between">
-                      <span className="glow-chip inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[linear-gradient(150deg,var(--brand-hi),var(--brand-lo))] text-[#04140e]">
+                      <span className="glow-chip inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[linear-gradient(150deg,var(--brand),var(--brand-lo))] text-white">
                         <Icon className="h-7 w-7" />
                       </span>
                       <span className="kicker-pill">{item.tag}</span>

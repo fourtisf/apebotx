@@ -88,7 +88,7 @@ function hashIdx(s: string, n: number): number {
 // list of indices, e.g. "0,1,4") to restrict the rotation.
 interface AlertParts {
   isBuy: boolean;
-  emoji: string; // scale/action emoji (🐳 / 🟢 / 🔴)
+  emoji: string; // scale/action emoji (🐳 / 🟣 / 🔴)
   who: string; // "Whale" | "Smart money"
   verb: string; // bought / grabbed / sold / ...
   amount: string; // "$1.2K"
@@ -233,7 +233,7 @@ export async function sendAlert(ev: SmartEvent): Promise<void> {
   const seed = `${ev.wallet}:${ev.tokenMint || ev.token}:${ev.action}`;
   const who = descriptor(ev.amountUsd);
   const verbs = isBuy ? BUY_VERB : SELL_VERB;
-  const emoji = isBuy ? (who === "Whale" ? "🐳" : "🟢") : "🔴";
+  const emoji = isBuy ? (who === "Whale" ? "🐳" : "🟣") : "🔴";
   const parts: AlertParts = {
     isBuy,
     emoji,

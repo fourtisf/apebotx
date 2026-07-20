@@ -22,7 +22,7 @@ function Cell({
   }
   if (value) {
     return positive ? (
-      <span className="mx-auto inline-flex h-6 w-6 items-center justify-center rounded-full bg-[linear-gradient(150deg,var(--brand-hi),var(--brand-lo))] text-[#04140e] shadow-[0_0_16px_-4px_color-mix(in_srgb,var(--accent)_80%,transparent)]">
+      <span className="mx-auto inline-flex h-6 w-6 items-center justify-center rounded-full bg-[linear-gradient(150deg,var(--brand),var(--brand-lo))] text-white shadow-[0_0_16px_-4px_color-mix(in_srgb,var(--accent)_80%,transparent)]">
         <Check className="h-3.5 w-3.5" strokeWidth={3} aria-label="Yes" />
       </span>
     ) : (

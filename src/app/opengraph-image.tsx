@@ -17,7 +17,7 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           padding: 76,
           background:
-            "linear-gradient(135deg, #05060a 0%, #0c1016 52%, #071a17 100%)",
+            "linear-gradient(135deg, #08070e 0%, #0d0b16 52%, #12091e 100%)",
           color: "#f3f5f7",
           fontFamily: "sans-serif",
         }}
@@ -38,9 +38,9 @@ export default function OpengraphImage() {
             <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
               <defs>
                 <linearGradient id="og-brand" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#6bffd1" />
-                  <stop offset="0.55" stopColor="#24e5a6" />
-                  <stop offset="1" stopColor="#2ad6d0" />
+                  <stop offset="0" stopColor="#a98bff" />
+                  <stop offset="0.55" stopColor="#7c4dff" />
+                  <stop offset="1" stopColor="#22d3ee" />
                 </linearGradient>
               </defs>
               <path
@@ -67,7 +67,7 @@ export default function OpengraphImage() {
             style={{
               fontSize: 26,
               letterSpacing: 4,
-              color: "#9fe9d5",
+              color: "#c9bcff",
               fontWeight: 600,
             }}
           >

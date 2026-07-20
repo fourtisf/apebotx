@@ -13,7 +13,7 @@ export interface Segment {
 }
 
 export const SEGMENTS: Record<SegmentKey, Segment> = {
-  smart: { key: "smart", label: "Smart", emoji: "🟢", color: "var(--accent)" },
+  smart: { key: "smart", label: "Smart", emoji: "🟣", color: "var(--accent)" },
   sniper: { key: "sniper", label: "Sniper", emoji: "⚡", color: "var(--amber)" },
   insider: { key: "insider", label: "Insider", emoji: "🔴", color: "var(--red)" },
   kol: { key: "kol", label: "KOL", emoji: "🎤", color: "var(--accent-2)" },

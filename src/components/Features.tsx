@@ -89,7 +89,7 @@ export function Features() {
                   />
 
                   <div className={cn(wide && "sm:max-w-md")}>
-                    <span className="glow-chip inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[linear-gradient(150deg,var(--brand-hi),var(--brand-lo))] text-[#04140e]">
+                    <span className="glow-chip inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[linear-gradient(150deg,var(--brand),var(--brand-lo))] text-white">
                       <Icon className="h-6 w-6" strokeWidth={2.2} />
                     </span>
                     <h3 className="mt-5 text-lg font-semibold text-text">

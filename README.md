@@ -85,12 +85,13 @@ All tokens live as CSS variables in `src/app/globals.css` (`--bg`, `--surface`,
 ### Brand assets
 
 The logo is an **apex chevron** — an upward `A` (the *Ape*, smart-money up-only)
-crowned by a glowing **signal-beacon node** (the *bot*), in a premium emerald→teal
-`--brand-hi → --brand → --accent-2` gradient on a **pure-black, borderless tile**
-with a soft emerald glow. It reads as an A, a signal antenna and a bot at once.
-The same emerald is the UI accent (`--accent`) too — CTAs, links, badges, pulses,
-glows and focus states — and a luminous teal (`--accent-2`) + a whisper of violet
-(`--accent-3`) drive the aurora background and animated gradient borders. Single
+crowned by a glowing **signal-beacon node** (the *bot*), in a premium electric
+violet→cyan `--brand-hi → --brand → --accent-2` gradient on a **pure-black,
+borderless tile** with a soft violet glow. It reads as an A, a signal antenna and
+a bot at once. The palette is deliberately **not emerald** — electric violet
+(`--accent`) drives CTAs, links, badges, pulses, glows and focus states, while a
+luminous cyan (`--accent-2`) + a whisper of magenta (`--accent-3`) drive the aurora
+background and animated gradient borders. Single
 source of truth: `<ApeBotXMonogram />` / `<BrandLockup />` in
 `src/components/Brand.tsx` (token-driven). Standalone files for press / external use:
 

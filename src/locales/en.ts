@@ -86,7 +86,7 @@ export const en = {
       {
         icon: "Layers",
         title: "Wallet Segments",
-        body: "Every wallet is labeled Smart 🟢, Sniper ⚡, Insider 🔴 or KOL 🎤, so you instantly read the intent behind a buy.",
+        body: "Every wallet is labeled Smart 🟣, Sniper ⚡, Insider 🔴 or KOL 🎤, so you instantly read the intent behind a buy.",
       },
       {
         icon: "TrendingUp",

@@ -35,9 +35,9 @@ interface Signal {
 
 const SIGNALS: Signal[] = [
   { emoji: "🐳", token: "GIGA", amount: "$25K", mc: "$2M", wallet: "AKCS…YpWE", win: 78, liq: "$180K" },
-  { emoji: "🟢", token: "POPCAT", amount: "$12K", mc: "$180M", wallet: "7bBo…geeE", win: 71, liq: "$1.4M" },
+  { emoji: "🟣", token: "POPCAT", amount: "$12K", mc: "$180M", wallet: "7bBo…geeE", win: 71, liq: "$1.4M" },
   { emoji: "🐳", token: "PNUT", amount: "$31K", mc: "$410M", wallet: "mPD7…Vgzb", win: 82, liq: "$3.2M" },
-  { emoji: "🟢", token: "MOODENG", amount: "$8.4K", mc: "$95M", wallet: "TJnb…KTST", win: 65, liq: "$620K" },
+  { emoji: "🟣", token: "MOODENG", amount: "$8.4K", mc: "$95M", wallet: "TJnb…KTST", win: 65, liq: "$620K" },
 ];
 
 /**
@@ -49,10 +49,10 @@ const SIGNALS: Signal[] = [
 export function BotShowcase() {
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
-  const [mounted, setMounted] = useState(false);
 
+  // SIGNALS[0] is deterministic, so the first render matches on server + client
+  // (no hydration guard needed); the interval only rotates on the client.
   useEffect(() => {
-    setMounted(true);
     if (reduce) return;
     const id = setInterval(() => setI((v) => (v + 1) % SIGNALS.length), 3800);
     return () => clearInterval(id);
@@ -84,9 +84,9 @@ export function BotShowcase() {
           </div>
 
           <div className="min-h-[9.5rem] px-4 py-4">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                key={mounted ? i : "seed"}
+                key={i}
                 initial={reduce ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
