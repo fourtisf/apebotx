@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#05060A"/><stop offset="58%" stop-color="#070F0C"/><stop offset="100%" stop-color="#051510"/>
+    </linearGradient>
+    <linearGradient id="em" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6BFFD1"/><stop offset="55%" stop-color="#24E5A6"/><stop offset="100%" stop-color="#2AD6D0"/>
+    </linearGradient>
+    <linearGradient id="emW" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6BFFD1"/><stop offset="100%" stop-color="#10C78D"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#12C98C" stop-opacity="0.40"/><stop offset="100%" stop-color="#12C98C" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#1BE39C" stroke-width="1" opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="1500" height="500" fill="url(#bg)"/>
+  <rect width="1500" height="500" fill="url(#grid)"/>
+  <ellipse cx="1245" cy="250" rx="410" ry="340" fill="url(#aura)"/>
+  <path d="M40 405 L300 368 L470 392 L660 300 L840 338 L1010 214 L1180 252 L1470 92" fill="none" stroke="#1BE39C" stroke-width="3" opacity="0.13"/>
+
+  <!-- apex-chevron mark (right) -->
+  <g transform="translate(1170,150) scale(5.2)" filter="url(#glow)">
+    <g fill="none" stroke="url(#em)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 25 L16 9.4 L25 25"/>
+      <path d="M11.4 18.4 H20.6"/>
+    </g>
+    <circle cx="16" cy="6.4" r="2.15" fill="url(#em)"/>
+  </g>
+
+  <!-- left column, tidy rhythm -->
+  <text x="90" y="196" font-size="116" font-weight="bold" letter-spacing="1" fill="#EAF3EE"><tspan fill="url(#emW)">APE</tspan>BOT<tspan fill="url(#emW)">X</tspan></text>
+  <text x="94" y="252" font-size="33" font-weight="bold" fill="#A6BCB2" letter-spacing="0.4">Smart-money bot for Solana — Telegram &amp; X</text>
+
+  <rect x="95" y="286" width="452" height="2.5" rx="1" fill="#12C98C" opacity="0.42"/>
+
+  <g font-size="23" font-weight="bold" transform="translate(95,332)">
+    <circle cx="7" cy="-7" r="5.5" fill="#12C98C"/><text x="22" y="0" fill="#C6EBDB">Scored wallets</text>
+    <circle cx="216" cy="-7" r="5.5" fill="#12C98C"/><text x="231" y="0" fill="#C6EBDB">Anti-rug fused</text>
+    <circle cx="470" cy="-7" r="5.5" fill="#12C98C"/><text x="485" y="0" fill="#C6EBDB">24/7 autonomous</text>
+  </g>
+
+  <text x="95" y="392" font-size="26" font-weight="bold" fill="#12C98C" letter-spacing="0.8">@apebotx<tspan fill="#5E7871" font-size="21" letter-spacing="1.5" dx="22">SOLANA · BSC · BASE · ETH · TRON</tspan></text>
+</svg>

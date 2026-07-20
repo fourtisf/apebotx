@@ -1,0 +1,490 @@
+/* Fonts are loaded via <link rel="preconnect"> + <link rel="stylesheet"> in the
+   root layout <head> (NOT CSS @import) so they fetch in parallel and don't block
+   first paint. See README "Fonts" to self-host the woff2 with next/font/local. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS — ApeBotX premium system
+   A deeper, richer near-black canvas with a dual emerald→teal
+   brand and a whisper of violet for aurora depth. Everything
+   (glass, glows, gradient borders, buttons) is token-driven.
+   ============================================================ */
+:root {
+  --bg: #05060a; /* deep premium near-black, a hair cool for depth */
+  --bg-2: #080a10;
+  --surface: #0d1017;
+  --surface-2: #14181f;
+  --surface-3: #1b2029;
+  --border: rgba(255, 255, 255, 0.075);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #f3f5f7;
+  --text-muted: #97a0ad;
+  --text-dim: #626b78;
+
+  /* Brand — emerald primary, driving the logo AND the UI accent. */
+  --brand: #24e5a6;
+  --brand-hi: #6bffd1;
+  --brand-lo: #10c78d;
+  --accent: #24e5a6; /* === --brand: CTAs, links, pulses, focus */
+  --accent-2: #2ad6d0; /* luminous teal — secondary glows / gradient depth */
+  --accent-3: #7c74ff; /* violet — tertiary aurora depth only, used sparingly */
+
+  --red: #ff7a7a;
+  --amber: #ffce54;
+  --radius: 22px;
+  --radius-lg: 28px;
+
+  --font-display: "Clash Display", system-ui, -apple-system, sans-serif;
+  --font-body: "Satoshi", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Signature brand gradients reused across marks, borders and text. */
+  --grad-brand: linear-gradient(135deg, var(--brand-hi) 0%, var(--brand) 42%, var(--accent-2) 100%);
+  --grad-aurora: conic-gradient(
+    from 210deg at 50% 50%,
+    color-mix(in srgb, var(--accent) 65%, transparent),
+    color-mix(in srgb, var(--accent-2) 60%, transparent),
+    color-mix(in srgb, var(--accent-3) 55%, transparent),
+    color-mix(in srgb, var(--accent) 65%, transparent)
+  );
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 32%, transparent);
+    color: #fff;
+  }
+
+  /* Accessible, on-brand focus ring */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Slim dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-2);
+    border-radius: 999px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a2f3a;
+  }
+}
+
+/* ============================================================
+   COMPONENT UTILITIES
+   ============================================================ */
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply scroll-mt-24 py-24 sm:py-32;
+  }
+
+  /* ---- Glass panels ---------------------------------------------------- */
+  .glass {
+    /* Premium elevated panel: top-lit gradient + inner highlight + soft drop
+       shadow give real depth. Modest blur keeps it cheap on the GPU. */
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 92%, transparent),
+      color-mix(in srgb, var(--surface) 74%, transparent)
+    );
+    backdrop-filter: blur(12px) saturate(125%);
+    -webkit-backdrop-filter: blur(12px) saturate(125%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.015),
+      0 24px 60px -28px rgba(0, 0, 0, 0.92);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-2) 96%, transparent),
+      color-mix(in srgb, var(--surface) 88%, transparent)
+    );
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+      0 40px 90px -40px rgba(0, 0, 0, 0.95);
+  }
+
+  /* Animated conic gradient border — the premium signature frame. Wrap content
+     in a child with its own solid/glass background; the ::before paints a thin
+     rotating emerald→teal→violet ring that only shows at the edges. */
+  .gradient-border {
+    position: relative;
+    border-radius: var(--radius);
+    isolation: isolate;
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--grad-aurora);
+    background-size: 200% 200%;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.55;
+    animation: border-pan 8s linear infinite;
+    z-index: -1;
+  }
+  .gradient-border:hover::before {
+    opacity: 0.9;
+  }
+
+  .kicker {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-text-muted;
+  }
+
+  /* Pill kicker with a gradient dot + faint emerald wash — premium eyebrow. */
+  .kicker-pill {
+    @apply inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.18em];
+    border-color: color-mix(in srgb, var(--accent) 26%, transparent);
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    color: color-mix(in srgb, var(--accent) 72%, white);
+  }
+
+  /* Accent gradient text (light → emerald) */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--text) 0%,
+      var(--text) 38%,
+      var(--accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Pure brand gradient text (emerald → teal) for wordmarks / emphasis. */
+  .text-brand-gradient {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Premium sheen for large display headings — white top → mint bottom. */
+  .headline-sheen {
+    background: linear-gradient(178deg, #ffffff 8%, #cdf5e8 62%, #7fe6cf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Hero stat numbers — emerald gradient + soft glow */
+  .stat-value {
+    background: linear-gradient(180deg, var(--brand-hi), var(--brand-lo));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 40%, transparent));
+  }
+
+  .hairline {
+    @apply border-t border-[var(--border)];
+  }
+
+  /* Soft emerald glow chip used behind icons / avatars. */
+  .glow-chip {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 8px 24px -12px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+
+  /* Horizontal divider that fades in from the accent at center. */
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent) 40%, transparent),
+      transparent
+    );
+  }
+}
+
+/* ============================================================
+   BACKGROUND LAYERS  (rendered by <Background />)
+   ============================================================ */
+.bg-layers {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* masked grid */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 68px 68px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 92% 62% at 50% -10%,
+    #000 30%,
+    transparent 76%
+  );
+  mask-image: radial-gradient(
+    ellipse 92% 62% at 50% -10%,
+    #000 30%,
+    transparent 76%
+  );
+  opacity: 0.55;
+}
+
+/* Aurora — a large, slowly drifting conic wash that gives the page its premium,
+   living gradient. Sits low-opacity behind everything, blurred to a soft cloud. */
+.bg-aurora {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 90rem;
+  height: 60rem;
+  transform: translateX(-50%);
+  background: var(--grad-aurora);
+  filter: blur(120px) saturate(130%);
+  opacity: 0.16;
+  animation: aurora-drift 24s ease-in-out infinite alternate;
+  border-radius: 999px;
+}
+
+/* gradient mesh wash + depth vignette */
+.bg-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      44rem 34rem at 16% -6%,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 56%
+    ),
+    radial-gradient(
+      42rem 32rem at 94% -2%,
+      color-mix(in srgb, var(--accent-2) 9%, transparent),
+      transparent 56%
+    ),
+    linear-gradient(180deg, transparent 58%, rgba(0, 0, 0, 0.42) 100%);
+}
+
+/* soft floating glow blobs */
+.bg-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(64px);
+  opacity: 0.12;
+}
+
+/* fine grain / noise overlay */
+.bg-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   MARQUEE (logo / signal ticker)
+   ============================================================ */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+.marquee-track:hover .marquee {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+/* live pulse dot */
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: pulse-ring 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes float-blob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+.animate-float {
+  animation: float-blob 9s ease-in-out infinite;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translateX(-50%) rotate(0deg) scale(1);
+    opacity: 0.14;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(-50%) rotate(28deg) scale(1.12);
+    opacity: 0.16;
+  }
+}
+
+@keyframes border-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Shimmer sweep for primary buttons / highlights. */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  60%,
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+/* Slow gradient text pan for emphasis words. */
+@keyframes text-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
