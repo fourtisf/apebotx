@@ -79,50 +79,67 @@ try {
   /* no manual list — auto-source only */
 }
 
-// ── 1) Solana Tracker — top traders ranked by WIN RATE (best signal) ──────────
+// ── 1) Solana Tracker — top traders by WIN RATE and by PnL (best signal) ──────
+// top-traders/all frequently reports only a handful of CLOSED trades per wallet
+// (1-3) even for wallets that booked real money, so a hard "min 20 trades" gate
+// zeroes the whole set. Instead we keep a high-win-rate wallet when it has
+// EITHER enough closed trades OR real realized PnL (a proven winner), and we
+// sweep TWO sort orders (winPercentage + total PnL) and de-dupe, so a few
+// hundred quality wallets come back instead of nothing.
 let stracker = [];
 if (process.env.SOLANATRACKER_API_KEY) {
   const key = process.env.SOLANATRACKER_API_KEY;
   const want = Math.max(1, Number(process.env.SOLANATRACKER_LIMIT || 150));
   const minWr = Number(process.env.SOLANATRACKER_MIN_WINRATE || 55);
-  const minTrades = Number(process.env.SOLANATRACKER_MIN_TRADES || 20);
+  const minTrades = Number(process.env.SOLANATRACKER_MIN_TRADES || 3);
+  const minPnl = Number(process.env.SOLANATRACKER_MIN_PNL || 500);
+  const sorts = (process.env.SOLANATRACKER_SORTS || "winPercentage,total")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
   const seen = new Set();
-  for (let page = 1; page <= 25 && stracker.length < want; page++) {
-    if (page > 1) await sleep(1100); // free tier ~1 req/s
-    let json;
-    try {
-      const res = await fetch(
-        `https://data.solanatracker.io/top-traders/all?page=${page}&sortBy=winPercentage&expandPnl=true`,
-        { headers: { "x-api-key": key, accept: "application/json" } },
-      );
-      if (!res.ok) {
-        console.warn(`Solana Tracker failed (${res.status}) page ${page}`);
+  for (const sortBy of sorts) {
+    for (let page = 1; page <= 25 && stracker.length < want; page++) {
+      await sleep(1100); // free tier ~1 req/s
+      let json;
+      try {
+        const res = await fetch(
+          `https://data.solanatracker.io/top-traders/all?page=${page}&sortBy=${encodeURIComponent(sortBy)}&expandPnl=true`,
+          { headers: { "x-api-key": key, accept: "application/json" } },
+        );
+        if (!res.ok) {
+          console.warn(`Solana Tracker failed (${res.status}) ${sortBy} page ${page}`);
+          break;
+        }
+        json = await res.json();
+      } catch (e) {
+        console.warn("Solana Tracker fetch failed:", e.message);
         break;
       }
-      json = await res.json();
-    } catch (e) {
-      console.warn("Solana Tracker fetch failed:", e.message);
-      break;
-    }
-    const rows = Array.isArray(json) ? json : json?.wallets || json?.data || [];
-    if (!rows.length) break;
-    for (const r of rows) {
-      const w = r.wallet || r.address;
-      const s = r.summary || r;
-      const wr = Number(s.winPercentage ?? s.winRate ?? 0);
-      const wins = Number(s.totalWins ?? 0);
-      const losses = Number(s.totalLosses ?? 0);
-      const trades = wins + losses || Number(s.totalTrades ?? s.total ?? 0);
-      // Require a real win-rate AND enough trades so a lucky 1-2 trade "100%"
-      // wallet doesn't slip in. Unknown trade count → trust the win-rate sort.
-      if (w && wr >= minWr && (trades === 0 || trades >= minTrades) && !seen.has(w)) {
-        seen.add(w);
-        stracker.push(w);
+      const rows = Array.isArray(json) ? json : json?.wallets || json?.data || [];
+      if (!rows.length) break;
+      for (const r of rows) {
+        const w = r.wallet || r.address;
+        const s = r.summary || r;
+        const wr = Number(s.winPercentage ?? s.winRate ?? 0);
+        const wins = Number(s.totalWins ?? 0);
+        const losses = Number(s.totalLosses ?? 0);
+        const trades = wins + losses; // closed round-trips (0 = unknown/none)
+        const pnl = Number(s.realized ?? s.total ?? 0); // booked profit (USD)
+        // Keep a high win-rate wallet if it's PROVEN by EITHER enough closed
+        // trades OR real realized profit. The PnL floor is what keeps a lucky
+        // 1-trade "100%" wallet with trivial profit out — without a PnL floor
+        // the strict trade gate zeroed the entire set.
+        const proven = trades >= minTrades || pnl >= minPnl;
+        if (w && wr >= minWr && proven && !seen.has(w)) {
+          seen.add(w);
+          stracker.push(w);
+        }
       }
+      if (rows.length < 10) break; // likely the last page
     }
-    if (rows.length < 10) break; // likely the last page
   }
-  console.log(`Solana Tracker (high win-rate): ${stracker.length}`);
+  console.log(`Solana Tracker (high win-rate + top PnL): ${stracker.length}`);
 }
 
 // ── 2) Birdeye — top traders by PnL, across several timeframes ────────────────
