@@ -12,7 +12,7 @@ export default function TermsPage() {
     <LegalPage title="Terms of Service" updated="June 2026">
       <p>
         {
-          "These terms govern your use of the Ocolos website and product (the “Service”). By using the Service you agree to them. Ocolos is an independent brand, powered by Fourtis."
+          "These terms govern your use of the Ocolos website and product (the “Service”). By using the Service you agree to them. Ocolos is an independent brand."
         }
       </p>
 
@@ -54,7 +54,7 @@ export default function TermsPage() {
       <h2>Liability</h2>
       <p>
         {
-          "To the maximum extent permitted by law, the Service is provided “as is” without warranties, and Ocolos and Fourtis are not liable for any trading losses or damages arising from your use of it."
+          "To the maximum extent permitted by law, the Service is provided “as is” without warranties, and Ocolos is not liable for any trading losses or damages arising from your use of it."
         }
       </p>
 

@@ -6,7 +6,7 @@ export const zh: LocaleDict = {
   meta: {
     title: "Ocolos — 自动跟随 Solana 上最聪明的资金",
     description:
-      "面向 Solana 的 memecoin 聪明钱机器人。为盈利钱包评分并分类（聪明 / 狙击 / 内部 / KOL），并以你的语言通过 X 实时推送提醒。由 Fourtis 提供支持。",
+      "面向 Solana 的 memecoin 聪明钱机器人。为盈利钱包评分并分类（聪明 / 狙击 / 内部 / KOL），并通过 X 实时推送提醒。",
   },
   nav: {
     links: {

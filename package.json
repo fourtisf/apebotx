@@ -2,7 +2,7 @@
   "name": "ocolos",
   "version": "0.1.0",
   "private": true,
-  "description": "Ocolos — Solana-first memecoin smart-money bot. Premium marketing site + Telegram & X delivery engine. Powered by Fourtis.",
+  "description": "Ocolos — Solana-first memecoin smart-money bot. Premium marketing site + X auto-posting engine.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

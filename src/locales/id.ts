@@ -6,7 +6,7 @@ export const id: LocaleDict = {
   meta: {
     title: "Ocolos — Otomatiskan uang terpintar di Solana",
     description:
-      "Bot smart-money memecoin berbasis Solana. Skor dompet untung, segmentasi (Smart / Sniper / Insider / KOL), dan dapatkan alert real-time di X dalam bahasamu. Didukung oleh Fourtis.",
+      "Bot smart-money memecoin berbasis Solana. Skor dompet untung, segmentasi (Smart / Sniper / Insider / KOL), dan dapatkan sinyal real-time langsung di X.",
   },
   nav: {
     links: {

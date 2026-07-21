@@ -4,7 +4,7 @@ Premium dark marketing site + delivery engine for **Ocolos** — a Solana-first
 memecoin **smart-money bot**. It scores profitable on-chain wallets and fires the
 signal the second they ape in, with wallet segmentation (Smart 🟢 / Sniper ⚡ /
 Insider 🔴 / KOL 🎤), anti-rug fusion, and native delivery on **Telegram and X**
-in multiple languages. Independent brand, **powered by Fourtis**.
+in multiple languages. Independent brand.
 
 > **Scope:** landing page only. Product data (feed, stats) is **illustrative** and clearly
 > labelled *private beta*. The waitlist endpoint **persists signups to a durable local JSONL

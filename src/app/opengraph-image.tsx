@@ -96,7 +96,7 @@ export default function OpengraphImage() {
           }}
         >
           <div>ocolos.xyz</div>
-          <div>powered by Fourtis</div>
+          <div>@Ocolosxyz</div>
         </div>
       </div>
     ),

@@ -81,7 +81,7 @@ export function OcolosMonogram({ className }: { className?: string }) {
  */
 export const OcolosMark = OcolosMonogram;
 
-/** Wordmark lockup: monogram + "Ocolos" + optional "powered by Fourtis". */
+/** Wordmark lockup: monogram + "Ocolos". */
 export function BrandLockup({
   poweredBy,
   className,

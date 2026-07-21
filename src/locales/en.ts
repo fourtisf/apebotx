@@ -7,12 +7,12 @@ export const en = {
   meta: {
     title: "Ocolos — Automate the smartest money on Solana",
     description:
-      "Solana-first memecoin smart-money bot. Score profitable wallets, segment them (Smart / Sniper / Insider / KOL), fuse anti-rug signals, and auto-post real-time alpha straight to X. Powered by Fourtis.",
+      "Solana-first memecoin smart-money bot. Score profitable wallets, segment them (Smart / Sniper / Insider / KOL), fuse anti-rug signals, and auto-post real-time alpha straight to X.",
   },
 
   nav: {
     brand: "Ocolos",
-    poweredBy: "powered by Fourtis",
+    poweredBy: "",
     links: {
       features: "Features",
       how: "How it works",
@@ -49,7 +49,7 @@ export const en = {
   },
 
   trust: {
-    label: "Incubated & powered by Fourtis",
+    label: "Built for Solana traders",
     chains: ["Solana", "BSC", "Base", "Ethereum", "Tron"],
   },
 
@@ -226,8 +226,8 @@ export const en = {
   },
 
   footer: {
-    tagline: "The smart-money bot for Solana memecoins — live on X. Independent brand, powered by Fourtis.",
-    poweredBy: "powered by Fourtis",
+    tagline: "The smart-money bot for Solana memecoins — live on X. Independent brand.",
+    poweredBy: "",
     rights: "All rights reserved.",
     columns: {
       product: {

@@ -8,7 +8,7 @@ export const SITE_URL =
 export const SITE_NAME = "Ocolos";
 export const SITE_TAGLINE = "Automate the smartest money on Solana.";
 export const SITE_DESCRIPTION =
-  "Ocolos is a Solana-first memecoin smart-money bot. It scores profitable on-chain wallets and fires the signal the second they ape in — segmented Smart, Sniper, Insider and KOL flows, anti-rug fused, delivered on Telegram and X in your language. Powered by Fourtis.";
+  "Ocolos is a Solana-first memecoin smart-money bot. It scores profitable on-chain wallets and fires the signal the second they ape in — segmented Smart, Sniper, Insider and KOL flows, anti-rug fused, auto-posted straight to X.";
 
 // Social / community
 export const X_HANDLE = "Ocolosxyz";
@@ -19,4 +19,3 @@ export const TELEGRAM_BOT_URL = "https://t.me/ocolos_bot";
 export const TELEGRAM_ALERTS_HANDLE = "ocolossignals";
 export const TELEGRAM_ALERTS_URL = "https://t.me/ocolossignals";
 
-export const FOURTIS_URL = "https://fourtis.io";

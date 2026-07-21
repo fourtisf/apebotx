@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useStrings } from "@/lib/strings";
 import { BrandLockup } from "@/components/Brand";
-import { X_URL, SITE_NAME, FOURTIS_URL } from "@/lib/site";
+import { X_URL, SITE_NAME } from "@/lib/site";
 
 export function Footer() {
   const { strings } = useStrings();
@@ -48,16 +48,14 @@ export function Footer() {
           <p>
             © {year} {SITE_NAME}. {f.rights}
           </p>
-          <p>
-            <a
-              href={FOURTIS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-text"
-            >
-              {f.poweredBy}
-            </a>
-          </p>
+          <a
+            href={X_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-text"
+          >
+            @Ocolosxyz
+          </a>
         </div>
       </div>
     </footer>

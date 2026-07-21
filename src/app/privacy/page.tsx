@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <LegalPage title="Privacy Policy" updated="June 2026">
       <p>
         {
-          "Ocolos (“we”, “us”) is an independent analytics brand, powered by Fourtis. This policy explains what we collect on this website and how we use it. By using the site you agree to it."
+          "Ocolos (“we”, “us”) is an independent analytics brand. This policy explains what we collect on this website and how we use it. By using the site you agree to it."
         }
       </p>
 

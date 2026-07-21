@@ -23,7 +23,7 @@ export function LegalPage({
       </Link>
 
       <div className="mt-10">
-        <BrandLockup poweredBy="powered by Fourtis" />
+        <BrandLockup />
       </div>
 
       <h1 className="mt-8 text-3xl font-semibold text-text sm:text-4xl">
