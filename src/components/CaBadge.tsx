@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { CA } from "@/lib/site";
 
 /**
- * Copyable contract-address chip. Until the token launches, `NEXT_PUBLIC_CA` is
- * empty → it shows "Coming soon" and copies a teaser line. Once you set
- * NEXT_PUBLIC_CA=<mint> (and rebuild), it shows the address and copies the real
- * CA. One place to flip on launch day.
+ * Copyable contract-address chip. The CA lives in lib/site.ts (NEXT_PUBLIC_CA
+ * overrides at build time). Empty → shows "Coming soon" and copies a teaser;
+ * set → shows the address and copies the real CA.
  */
-const CA = process.env.NEXT_PUBLIC_CA?.trim() || "";
 
 function short(addr: string) {
   return addr.length > 13 ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : addr;
