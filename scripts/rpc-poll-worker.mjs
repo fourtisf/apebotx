@@ -66,17 +66,23 @@ const url = `http://localhost:${port}/api/ingest/rpc-poll${
 }`;
 
 let busy = false; // a cycle can take a few seconds; never overlap ticks
+let ticks = 0;
 
 async function tick() {
   if (busy) return;
   busy = true;
+  ticks++;
   try {
     const r = await fetch(url);
     const j = await r.json();
     if (j.ingested) {
-      console.log(new Date().toISOString(), `ingested ${j.ingested}/${j.found}`);
+      console.log(new Date().toISOString(), `ingested ${j.ingested} new / ${j.found} swaps`);
     } else if (j.ok === false) {
       console.error("rpc-poll-worker:", j.error || r.status);
+    } else if (ticks % 10 === 1) {
+      // Heartbeat every ~10 cycles so a quiet stretch (no new buys) never reads
+      // as "dead". `found 0` here usually just means no tracked wallet traded.
+      console.log(new Date().toISOString(), `alive — ${j.found ?? 0} recent swaps, 0 new`);
     }
   } catch (e) {
     console.error("rpc-poll-worker:", e.message);

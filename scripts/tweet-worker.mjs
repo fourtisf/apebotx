@@ -56,11 +56,25 @@ const url = `http://localhost:${port}/api/tweets/dispatch${
   secret ? `?secret=${encodeURIComponent(secret)}` : ""
 }`;
 
+let ticks = 0;
+
 async function tick() {
+  ticks++;
   try {
     const r = await fetch(url);
     const j = await r.json();
-    if (j.posted) console.log(new Date().toISOString(), "tweeted", j.posted);
+    if (j.posted) {
+      console.log(new Date().toISOString(), "tweeted", j.posted);
+    } else if (j.considered > 0) {
+      // Candidates existed but none posted — show WHY (paced, gate, duplicate).
+      console.log(
+        new Date().toISOString(),
+        `considered ${j.considered}, no post${j.blocked ? ` (${j.blocked})` : ""}`,
+      );
+    } else if (ticks % 10 === 1) {
+      // Heartbeat every ~10 cycles so silence never reads as "dead".
+      console.log(new Date().toISOString(), "alive — pool empty, waiting for a qualifying buy");
+    }
   } catch (e) {
     console.error("tweet-worker:", e.message);
   }
