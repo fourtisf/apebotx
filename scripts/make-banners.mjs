@@ -1,17 +1,37 @@
 #!/usr/bin/env node
 /**
  * Render the Ocolos social banners to PNG (1500×500 @2x → 3000×1000, X-header
- * size) with Playwright + the pre-installed Chromium. Run from the project dir:
+ * size) with Playwright + the pre-installed Chromium, using embedded premium
+ * fonts (Space Grotesk display + Inter UI). Run from the project dir:
+ *   npm install --no-save @fontsource/space-grotesk @fontsource/inter
  *   node scripts/make-banners.mjs
- * Outputs: public/social/x-banner.png (Ocolos) and
- *          public/social/banner-robinhood-soon.png (Robinhood Chain — Soon).
+ * Outputs: public/social/x-banner.png (Ocolos live feed) and
+ *          public/social/banner-robinhood-soon.png (Robinhood Chain — will be added).
  */
 import { chromium } from "playwright";
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
-// Shared bot-head mark (hexagon head + antenna beacon + two eyes + mouth).
+// ── embed fonts as base64 @font-face (self-contained render) ──────────────────
+async function face(family, weight, file) {
+  const b64 = (await readFile(file)).toString("base64");
+  return `@font-face{font-family:'${family}';font-weight:${weight};font-style:normal;font-display:block;src:url(data:font/woff2;base64,${b64}) format('woff2')}`;
+}
+const SG = "node_modules/@fontsource/space-grotesk/files";
+const IN = "node_modules/@fontsource/inter/files";
+const fonts = (
+  await Promise.all([
+    face("Space Grotesk", 500, `${SG}/space-grotesk-latin-500-normal.woff2`),
+    face("Space Grotesk", 600, `${SG}/space-grotesk-latin-600-normal.woff2`),
+    face("Space Grotesk", 700, `${SG}/space-grotesk-latin-700-normal.woff2`),
+    face("Inter", 500, `${IN}/inter-latin-500-normal.woff2`),
+    face("Inter", 600, `${IN}/inter-latin-600-normal.woff2`),
+    face("Inter", 700, `${IN}/inter-latin-700-normal.woff2`),
+  ])
+).join("\n");
+
+// ── shared bot-head mark (hexagon + antenna beacon + eyes + mouth) ────────────
 const mark = (id, size) => `
-<svg width="${size}" height="${size}" viewBox="0 0 32 32" style="filter:drop-shadow(0 0 18px rgba(124,77,255,.55))">
+<svg width="${size}" height="${size}" viewBox="0 0 32 32" style="filter:drop-shadow(0 0 14px rgba(124,77,255,.6))">
   <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0%" stop-color="#a98bff"/><stop offset="55%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#22d3ee"/>
   </linearGradient></defs>
@@ -23,121 +43,160 @@ const mark = (id, size) => `
   <line x1="13" y1="21.6" x2="19" y2="21.6" stroke="url(#${id})" stroke-width="1.7" stroke-linecap="round"/>
 </svg>`;
 
+const spark = (color) => `
+<svg width="72" height="26" viewBox="0 0 72 26" fill="none">
+  <path d="M2 20 L14 16 L24 18 L36 9 L48 12 L60 5 L70 3" stroke="${color}" stroke-width="2.4"
+    stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+  <circle cx="70" cy="3" r="2.6" fill="${color}"/>
+</svg>`;
+
 const base = `
+  ${fonts}
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{width:1500px;height:500px}
-  body{font-family:'Inter','Segoe UI',system-ui,'Helvetica Neue',Arial,sans-serif;
-       -webkit-font-smoothing:antialiased}
+  body{font-family:'Inter',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+       text-rendering:geometricPrecision}
   .stage{position:relative;width:1500px;height:500px;overflow:hidden;
-    background:linear-gradient(135deg,#08070e 0%,#0b0a14 58%,#0e0a1a 100%)}
+    background:radial-gradient(130% 130% at 18% 8%, #14102a 0%, #0a0813 46%, #08070e 100%)}
   .grid{position:absolute;inset:0;
     background-image:linear-gradient(rgba(124,77,255,.05) 1px,transparent 1px),
       linear-gradient(90deg,rgba(124,77,255,.05) 1px,transparent 1px);
-    background-size:48px 48px}
-  .vignette{position:absolute;inset:0;
-    background:radial-gradient(120% 120% at 50% 120%,transparent 55%,rgba(0,0,0,.55) 100%)}
-  .grad{background:linear-gradient(135deg,#a98bff 0%,#7c4dff 55%,#22d3ee 100%);
+    background-size:52px 52px;mask-image:radial-gradient(120% 120% at 30% 40%,#000 40%,transparent 85%)}
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(130% 130% at 50% 130%,transparent 52%,rgba(0,0,0,.6) 100%)}
+  .disp{font-family:'Space Grotesk','Inter',sans-serif}
+  .gradV{background:linear-gradient(120deg,#c3b0ff 0%,#7c4dff 60%,#22d3ee 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .word{background:linear-gradient(180deg,#a98bff,#5a2fe0);
+  .gradG{background:linear-gradient(120deg,#d4ff7a 0%,#00e07a 55%,#00c805 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lock{position:absolute;left:88px;top:56px;display:flex;align-items:center;gap:15px}
+  .lock .nm{font-family:'Space Grotesk';font-size:29px;font-weight:700;letter-spacing:.5px;color:#f1eff8}
+  .panel{position:absolute;border-radius:26px;overflow:hidden;
+    background:linear-gradient(160deg,rgba(38,30,66,.66),rgba(13,10,24,.72));
+    border:1px solid rgba(168,139,255,.20);
+    box-shadow:0 34px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02),
+      inset 0 1px 0 rgba(255,255,255,.07)}
+  .panel .sheen{position:absolute;left:0;right:0;top:0;height:120px;
+    background:linear-gradient(180deg,rgba(124,77,255,.16),transparent)}
+  .phead{position:relative;display:flex;align-items:center;justify-content:space-between;
+    padding:22px 24px 14px}
+  .phTitle{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';
+    font-size:20px;font-weight:700;letter-spacing:1.5px;color:#efeafb}
+  .pulse{width:11px;height:11px;border-radius:50%;background:#ff4d6d;
+    box-shadow:0 0 0 4px rgba(255,77,109,.18),0 0 12px rgba(255,77,109,.9)}
+  .tag{font-family:'Inter';font-size:14px;font-weight:700;letter-spacing:1.5px;color:#9a92b8;
+    border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 12px}
+  .rows{position:relative;padding:4px 16px 18px;display:flex;flex-direction:column;gap:11px}
+  .row{display:flex;align-items:center;gap:15px;padding:13px 15px;border-radius:15px;
+    background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+  .av{width:46px;height:46px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;font-size:15px;color:#0c0912;
+    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25),0 6px 16px rgba(0,0,0,.4)}
+  .rc{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .sym{font-family:'Space Grotesk';font-size:20px;font-weight:700;color:#f4f2fb;line-height:1}
+  .act{font-size:14px;font-weight:600;color:#9089ab;line-height:1}
+  .spacer{flex:1}
+  .amt{font-family:'Space Grotesk';font-size:20px;font-weight:700;color:#eafff3;text-align:right;line-height:1}
+  .wr{margin-top:5px;font-size:13px;font-weight:700;color:#7bf5b0;
+    background:rgba(0,224,122,.12);border:1px solid rgba(0,224,122,.32);border-radius:999px;padding:3px 9px}
+  .foot{position:absolute;left:90px;bottom:44px;display:flex;align-items:center;gap:22px}
+  .live{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:700;letter-spacing:2px;
+    color:#7bf5b0;background:rgba(0,224,122,.1);border:1px solid rgba(0,224,122,.3);
+    border-radius:999px;padding:9px 17px}
+  .live .p{width:9px;height:9px;border-radius:50%;background:#00e07a;box-shadow:0 0 10px #00e07a}
+  .handle{font-family:'Space Grotesk';font-size:24px;font-weight:700;color:#9d80ff;letter-spacing:.3px}
+  .site{font-size:20px;font-weight:600;color:#6c6984;letter-spacing:.5px}
 `;
 
-// ─────────────── Banner 1 — Ocolos ───────────────
+// ─────────────── Banner 1 — Ocolos LIVE signal feed ───────────────
+const row = (grad, initials, sym, act, amt, wr) => `
+  <div class="row">
+    <div class="av" style="background:linear-gradient(135deg,${grad})">${initials}</div>
+    <div class="rc"><div class="sym">${sym}</div><div class="act">${act}</div></div>
+    <div class="spacer"></div>
+    ${spark("#00e07a")}
+    <div class="rc" style="align-items:flex-end;text-align:right">
+      <div class="amt">${amt}</div><div class="wr">${wr}</div>
+    </div>
+  </div>`;
+
 const ocolos = `<!doctype html><html><head><meta charset="utf-8"><style>${base}
-  .aura{position:absolute;right:-120px;top:50%;transform:translateY(-50%);
-    width:820px;height:680px;border-radius:50%;
-    background:radial-gradient(closest-side,rgba(124,77,255,.42),rgba(124,77,255,0))}
-  .trail{position:absolute;inset:0}
-  .content{position:absolute;left:92px;top:78px}
-  .word1{font-size:118px;font-weight:800;letter-spacing:1px;color:#f4f3f8;line-height:1}
-  .tag{margin-top:20px;font-size:33px;font-weight:700;color:#b9b6cc;letter-spacing:.3px}
-  .rule{margin-top:26px;width:470px;height:3px;border-radius:2px;
-    background:linear-gradient(90deg,#7c4dff,rgba(124,77,255,0))}
-  .chips{margin-top:30px;display:flex;gap:40px;font-size:24px;font-weight:700;color:#cabfe6}
-  .chips .d{display:flex;align-items:center;gap:13px}
-  .dot{width:12px;height:12px;border-radius:50%;background:#7c4dff;
-    box-shadow:0 0 12px rgba(124,77,255,.9)}
-  .foot{position:absolute;left:95px;bottom:44px;display:flex;align-items:center;gap:26px}
-  .handle{font-size:27px;font-weight:800;color:#8b6bff;letter-spacing:.4px}
-  .site{font-size:22px;font-weight:700;color:#6c6984;letter-spacing:1px}
-  .badge{font-size:20px;font-weight:800;color:#22d3ee;letter-spacing:2px;
-    border:1.5px solid rgba(34,211,238,.4);border-radius:999px;padding:7px 16px}
-  .markwrap{position:absolute;right:150px;top:50%;transform:translateY(-50%)}
+  .h{position:absolute;left:88px;top:150px;font-family:'Space Grotesk';font-weight:700;
+    font-size:60px;line-height:1.04;letter-spacing:-.5px;color:#f6f4fc}
+  .sub{position:absolute;left:90px;top:300px;width:660px;font-size:24px;font-weight:500;
+    line-height:1.4;color:#a7a2be}
+  .lp{position:absolute;left:912px;top:64px;width:500px;height:372px}
 </style></head><body>
   <div class="stage">
     <div class="grid"></div>
-    <div class="aura"></div>
-    <svg class="trail" viewBox="0 0 1500 500" preserveAspectRatio="none">
-      <path d="M40 410 L300 372 L470 396 L660 300 L840 338 L1010 210 L1180 250 L1470 88"
-        fill="none" stroke="#7c4dff" stroke-width="3" opacity=".14"/>
-      <circle cx="1010" cy="210" r="6" fill="#22d3ee" opacity=".7"/>
-      <circle cx="1470" cy="88" r="6" fill="#ff5cc8" opacity=".7"/>
-    </svg>
-    <div class="markwrap">${mark("em1", 300)}</div>
-    <div class="content">
-      <div class="word1"><span class="word">OCO</span>LOS</div>
-      <div class="tag">The smartest money on Solana leaves a trail.</div>
-      <div class="rule"></div>
-      <div class="chips">
-        <div class="d"><span class="dot"></span>Scored wallets</div>
-        <div class="d"><span class="dot"></span>Anti-rug fused</div>
-        <div class="d"><span class="dot"></span>24/7 autonomous</div>
-      </div>
-    </div>
+    <div class="lock">${mark("em1", 44)}<span class="nm">Ocolos</span></div>
+    <div class="h disp">See smart money<br><span class="gradV">the second it moves.</span></div>
+    <div class="sub">Ocolos scores Solana's winning wallets and fires the signal the instant they ape in — live on X.</div>
     <div class="foot">
+      <span class="live"><span class="p"></span>LIVE</span>
       <span class="handle">@Ocolosxyz</span>
       <span class="site">ocolos.xyz</span>
-      <span class="badge">SOLANA · LIVE ON X</span>
+    </div>
+    <div class="panel lp">
+      <div class="sheen"></div>
+      <div class="phead">
+        <div class="phTitle"><span class="pulse"></span>LIVE SIGNALS</div>
+        <div class="tag">SOLANA</div>
+      </div>
+      <div class="rows">
+        ${row("#f7b955,#e8863b", "W", "$WIF", "smart-money buy", "$92K", "94% WR")}
+        ${row("#8a7bff,#5a2fe0", "P", "$POPCAT", "whale loaded", "$58K", "88% WR")}
+        ${row("#ffcf3a,#f79b1a", "B", "$BONK", "conviction buy", "$210K", "91% WR")}
+      </div>
     </div>
     <div class="vignette"></div>
   </div>
 </body></html>`;
 
-// ─────────────── Banner 2 — Robinhood Chain (Coming Soon) ───────────────
+// ─────────────── Banner 2 — Robinhood Chain will be added ───────────────
+const chainRow = (grad, initials, name, desc, badge, badgeCls) => `
+  <div class="row">
+    <div class="av" style="background:linear-gradient(135deg,${grad})">${initials}</div>
+    <div class="rc"><div class="sym" style="font-size:19px">${name}</div><div class="act">${desc}</div></div>
+    <div class="spacer"></div>
+    <span class="cbadge ${badgeCls}">${badge}</span>
+  </div>`;
+
 const robinhood = `<!doctype html><html><head><meta charset="utf-8"><style>${base}
-  .auraV{position:absolute;left:-190px;top:50%;transform:translateY(-50%);
-    width:680px;height:600px;border-radius:50%;
-    background:radial-gradient(closest-side,rgba(124,77,255,.28),rgba(124,77,255,0))}
-  .auraG{position:absolute;right:-230px;top:50%;transform:translateY(-50%);
-    width:720px;height:620px;border-radius:50%;
-    background:radial-gradient(closest-side,rgba(0,224,122,.17),rgba(0,224,122,0))}
-  .greenword{background:linear-gradient(135deg,#c6ff5e 0%,#00e07a 55%,#00c805 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    filter:drop-shadow(0 0 30px rgba(0,224,122,.22))}
-  .lock{position:absolute;left:92px;top:52px;display:flex;align-items:center;gap:16px}
-  .lock .nm{font-size:30px;font-weight:800;letter-spacing:2px;color:#e9e7f2}
-  .kicker{position:absolute;left:94px;top:142px;font-size:23px;font-weight:800;letter-spacing:6px;color:#8b6bff}
-  .big{position:absolute;left:90px;top:176px;font-size:82px;font-weight:800;line-height:1;color:#f4f3f8}
-  .row{position:absolute;left:94px;top:300px;display:flex;align-items:center;gap:26px}
-  .soon{display:inline-flex;align-items:center;gap:11px;font-size:23px;font-weight:800;
-    letter-spacing:3px;color:#041209;background:linear-gradient(135deg,#c6ff5e,#00e07a);
-    border-radius:999px;padding:10px 22px;box-shadow:0 0 22px rgba(0,224,122,.4)}
-  .soon .p{width:11px;height:11px;border-radius:50%;background:#041209}
-  .sub{font-size:27px;font-weight:700;color:#b9b6cc;letter-spacing:.3px}
-  .chips{position:absolute;left:94px;top:392px;display:flex;gap:42px;font-size:23px;font-weight:800;letter-spacing:.5px}
-  .chip{display:flex;align-items:center;gap:13px}
-  .chip.live{color:#cabfe6}.chip.live .p{background:#7c4dff;box-shadow:0 0 12px rgba(124,77,255,.9)}
-  .chip.soon2{color:#9fe7bf}.chip.soon2 .p{background:#00e07a;box-shadow:0 0 12px rgba(0,224,122,.9)}
-  .chip .p{width:12px;height:12px;border-radius:50%}
-  .foot{position:absolute;left:94px;top:450px;font-size:23px;font-weight:800;color:#8b6bff;letter-spacing:.4px}
-  .foot span{color:#6c6984;font-weight:700;letter-spacing:1px}
+  .h{position:absolute;left:88px;top:150px;font-family:'Space Grotesk';font-weight:700;
+    font-size:58px;line-height:1.05;letter-spacing:-.5px;color:#f6f4fc}
+  .sub{position:absolute;left:90px;top:300px;width:660px;font-size:24px;font-weight:500;
+    line-height:1.4;color:#a7a2be}
+  .lp{position:absolute;left:912px;top:78px;width:500px;height:344px}
+  .cbadge{font-size:14px;font-weight:700;letter-spacing:1.2px;border-radius:999px;padding:7px 15px}
+  .cbadge.live{color:#c9bcff;background:rgba(124,77,255,.14);border:1px solid rgba(124,77,255,.4)}
+  .cbadge.soon{color:#89f2b6;background:rgba(0,224,122,.13);border:1px solid rgba(0,224,122,.4)}
+  .cmore{display:flex;align-items:center;justify-content:center;gap:9px;padding:12px;margin-top:2px;
+    font-size:15px;font-weight:600;letter-spacing:1px;color:#6f6b86}
+  .greenpulse{background:#00e07a !important;box-shadow:0 0 0 4px rgba(0,224,122,.18),0 0 12px rgba(0,224,122,.9) !important}
 </style></head><body>
   <div class="stage">
     <div class="grid"></div>
-    <div class="auraV"></div>
-    <div class="auraG"></div>
-    <div class="lock">${mark("em2", 46)}<span class="nm">OCOLOS</span></div>
-    <div class="kicker">THE EYE IS EXPANDING</div>
-    <div class="big"><span class="greenword">Robinhood Chain</span></div>
-    <div class="row">
-      <span class="soon"><span class="p"></span>COMING SOON</span>
-      <span class="sub">Smart-money tracking moves beyond Solana.</span>
+    <div class="lock">${mark("em2", 44)}<span class="nm">Ocolos</span></div>
+    <div class="h disp"><span class="gradG">Robinhood Chain</span><br>will be added.</div>
+    <div class="sub">The eye is expanding beyond Solana — same smart-money tracking, one more chain.</div>
+    <div class="foot">
+      <span class="live"><span class="p"></span>EXPANDING</span>
+      <span class="handle">@Ocolosxyz</span>
+      <span class="site">ocolos.xyz</span>
     </div>
-    <div class="chips">
-      <span class="chip live"><span class="p"></span>SOLANA — LIVE</span>
-      <span class="chip soon2"><span class="p"></span>ROBINHOOD CHAIN — SOON</span>
+    <div class="panel lp">
+      <div class="sheen"></div>
+      <div class="phead">
+        <div class="phTitle"><span class="pulse greenpulse"></span>NETWORKS</div>
+        <div class="tag">ROADMAP</div>
+      </div>
+      <div class="rows">
+        ${chainRow("#9945ff,#14f195", "◎", "Solana", "Smart-money tracking", "● LIVE", "live")}
+        ${chainRow("#d4ff7a,#00c805", "R", "Robinhood Chain", "Integration in progress", "● SOON", "soon")}
+        <div class="cmore">+ more chains on the radar</div>
+      </div>
     </div>
-    <div class="foot">@Ocolosxyz&nbsp;&nbsp;·&nbsp;&nbsp;<span>ocolos.xyz</span></div>
     <div class="vignette"></div>
   </div>
 </body></html>`;
@@ -154,6 +213,7 @@ const page = await browser.newPage({
 });
 for (const j of jobs) {
   await page.setContent(j.html, { waitUntil: "networkidle" });
+  await page.evaluate(() => document.fonts.ready);
   const buf = await page.screenshot({ type: "png" });
   await writeFile(j.out, buf);
   console.log(`✓ ${j.out} (${(buf.length / 1024).toFixed(0)} KB)`);
