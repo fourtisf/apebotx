@@ -14,26 +14,87 @@
  */
 import { readFile, writeFile } from "node:fs/promises";
 
+/**
+ * Load .env.local so HELIUS_API_KEY / WEBHOOK_URL / INGEST_SECRET resolve when
+ * run as a plain `node` script (only Next reads .env.local otherwise). Existing
+ * env wins, so an inline override still works.
+ */
+async function loadEnvLocal() {
+  let txt = "";
+  try {
+    txt = await readFile(new URL("../.env.local", import.meta.url), "utf8");
+  } catch {
+    try {
+      txt = await readFile(".env.local", "utf8");
+    } catch {
+      return;
+    }
+  }
+  for (const raw of txt.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+    const eq = line.indexOf("=");
+    if (eq === -1) continue;
+    const key = line.slice(0, eq).trim();
+    let val = line.slice(eq + 1).trim();
+    if (
+      (val.startsWith('"') && val.endsWith('"')) ||
+      (val.startsWith("'") && val.endsWith("'"))
+    ) {
+      val = val.slice(1, -1);
+    } else {
+      const hash = val.indexOf(" #");
+      if (hash !== -1) val = val.slice(0, hash).trim();
+    }
+    if (process.env[key] === undefined) process.env[key] = val;
+  }
+}
+await loadEnvLocal();
+
 const apiKey = process.env.HELIUS_API_KEY;
-const webhookURL = process.env.WEBHOOK_URL;
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://ocolos.xyz").replace(
+  /\/+$/,
+  "",
+);
+const webhookURL = process.env.WEBHOOK_URL || `${siteUrl}/api/ingest/helius`;
 const authHeader = process.env.INGEST_SECRET || "";
 const walletsFile = process.env.SMART_WALLETS_FILE || "data/smart-wallets.json";
 
-if (!apiKey || !webhookURL) {
-  console.error("Set HELIUS_API_KEY and WEBHOOK_URL env vars.");
+if (!apiKey) {
+  console.error(
+    "Set HELIUS_API_KEY in .env.local (get it from https://dashboard.helius.dev).",
+  );
   process.exit(1);
+}
+
+// Base set = whatever source-wallets.mjs already produced. That script is the
+// sourcing tool now; this one's job is to REGISTER those wallets with Helius —
+// NOT to re-source, and definitely not to overwrite a large set with a smaller.
+let existingTracked = [];
+try {
+  const parsed = JSON.parse(await readFile("data/tracked-wallets.json", "utf8"));
+  if (Array.isArray(parsed)) {
+    existingTracked = parsed;
+    console.log(`Base: ${existingTracked.length} wallets from data/tracked-wallets.json`);
+  }
+} catch {
+  /* none yet — will rely on manual + optional live sources */
 }
 
 let manual = [];
 try {
   manual = JSON.parse(await readFile(walletsFile, "utf8"));
 } catch {
-  console.log(`(no ${walletsFile} — using GMGN-sourced wallets only)`);
+  /* no manual list — base + optional live sources only */
 }
+
+// Live re-sourcing here is OFF by default (source-wallets.mjs owns that and
+// reaches far more sources). Set WEBHOOK_RESOURCE=true to also pull these.
+const reSource = process.env.WEBHOOK_RESOURCE === "true";
 
 // Auto-source smart wallets from GMGN (set USE_GMGN_WALLETS=false to skip).
 let gmgn = [];
-if (process.env.USE_GMGN_WALLETS !== "false") {
+if (reSource && process.env.USE_GMGN_WALLETS !== "false") {
   try {
     const res = await fetch(
       "https://gmgn.ai/defi/quotation/v1/rank/sol/wallets/7d?orderby=pnl_7d&direction=desc",
@@ -67,7 +128,7 @@ if (process.env.USE_GMGN_WALLETS !== "false") {
 // (BIRDEYE_TRACK_LIMIT, default 50). On failure we print the response body so a
 // 400/401 is diagnosable (bad key, unsubscribed package, wrong param, …).
 let birdeye = [];
-if (process.env.BIRDEYE_API_KEY) {
+if (reSource && process.env.BIRDEYE_API_KEY) {
   const want = Math.max(1, Number(process.env.BIRDEYE_TRACK_LIMIT || 100));
   const PAGE = 10;
   const pages = Math.min(Math.ceil(want / PAGE), 30); // hard cap ~300
@@ -117,7 +178,7 @@ if (process.env.BIRDEYE_API_KEY) {
 // are ACTUALLY trading hot memecoins right now, so the feed isn't just quiet
 // top-PnL whales. Set USE_ACTIVE_TRADERS=false to skip.
 let active = [];
-if (process.env.USE_ACTIVE_TRADERS !== "false") {
+if (reSource && process.env.USE_ACTIVE_TRADERS !== "false") {
   const minUsd = Number(process.env.ACTIVE_MIN_USD || 1000);
   const wantPools = Math.max(1, Number(process.env.ACTIVE_POOLS || 15));
   try {
@@ -164,6 +225,8 @@ if (process.env.USE_ACTIVE_TRADERS !== "false") {
 // tracks — otherwise live re-sourcing could recognize fewer wallets and drop
 // their swaps. The app reads this file (see lib/server/wallets.ts).
 const trackedMap = new Map();
+for (const w of existingTracked)
+  if (w?.address) trackedMap.set(w.address, w); // base: the already-sourced set
 for (const a of active)
   if (a) trackedMap.set(a, { address: a, label: "Active", segment: "smart" });
 for (const a of [...birdeye, ...gmgn])
@@ -233,7 +296,7 @@ const respText = await res.text();
 console.log("HTTP", res.status);
 if (!res.ok) console.log(respText.slice(0, 500)); // only dump the body on error
 console.log(
-  `\nSources — birdeye ${birdeye.length}, active ${active.length}, gmgn ${gmgn.length}, manual ${manual.length}` +
+  `\nSources — base ${existingTracked.length}, birdeye ${birdeye.length}, active ${active.length}, gmgn ${gmgn.length}, manual ${manual.length}` +
     ` → ${accountAddresses.length} unique wallet(s).`,
 );
 if (res.ok) {
