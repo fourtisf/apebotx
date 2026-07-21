@@ -76,30 +76,30 @@ export interface StyleParts {
 
 export const STYLE_MAP: Record<string, (p: StyleParts) => string> = {
   classic: (p) =>
-    `🐳 A ${p.whaleTag} just bought ${p.amount} of ${p.tok}` +
+    `👁 Ocolos spotted a ${p.whaleTag} ape ${p.amount} into ${p.tok}` +
     (p.mc ? ` at ${p.mc} MC` : "") +
     (p.wr ? ` · ${p.wr}% win-rate wallet` : ""),
   alert: (p) =>
-    `🚨 Smart-money buy — ${p.amount} into ${p.tok}` +
+    `📡 On the radar — ${p.amount} flowing into ${p.tok}` +
     (p.mc ? ` at ${p.mc} MC` : "") +
     (p.wr ? ` from a ${p.wr}% win-rate wallet` : ""),
   punchy: (p) =>
-    `👀 A ${p.wr ? `${p.wr}% win-rate ` : ""}whale just aped ${p.amount} into ${p.tok}` +
+    `👀 Eyes on ${p.tok} — a ${p.wr ? `${p.wr}% win-rate ` : ""}whale just loaded ${p.amount}` +
     (p.mc ? ` (${p.mc} MC)` : ""),
   conviction: (p) =>
-    `💎 High-conviction buy: ${p.amount} of ${p.tok}` +
+    `💎 Conviction buy: ${p.amount} of ${p.tok}` +
     (p.mc ? ` at ${p.mc} MC` : "") +
     (p.wr ? ` · ${p.wr}% win-rate wallet` : ""),
   flow: (p) =>
-    `📊 Smart-money inflow → ${p.tok}: ${p.amount}` +
+    `🎯 Tracked smart money → ${p.tok}: ${p.amount}` +
     (p.mc ? ` at ${p.mc} MC` : "") +
-    (p.wr ? `. Wallet win-rate ${p.wr}%` : ""),
+    (p.wr ? ` · ${p.wr}% WR wallet` : ""),
   fomo: (p) =>
-    `🔥 Whales are loading ${p.tok} — ${p.amount} buy` +
+    `🔥 ${p.tok} is heating up — smart money grabbed ${p.amount}` +
     (p.mc ? ` at ${p.mc} MC` : "") +
     (p.wr ? ` from a ${p.wr}% win-rate wallet` : ""),
   minimal: (p) =>
-    `🐳 ${p.amount} → ${p.tok}` +
+    `👁 ${p.amount} → ${p.tok}` +
     (p.mc ? ` at ${p.mc} MC` : "") +
     (p.wr ? ` · ${p.wr}% WR` : ""),
 };
