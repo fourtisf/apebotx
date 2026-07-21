@@ -3,13 +3,7 @@
 import Link from "next/link";
 import { useStrings } from "@/lib/strings";
 import { BrandLockup } from "@/components/Brand";
-import {
-  X_URL,
-  TELEGRAM_MAIN,
-  TELEGRAM_ALERTS_URL,
-  SITE_NAME,
-  FOURTIS_URL,
-} from "@/lib/site";
+import { X_URL, SITE_NAME, FOURTIS_URL } from "@/lib/site";
 
 export function Footer() {
   const { strings } = useStrings();
@@ -24,8 +18,6 @@ export function Footer() {
   ];
   const community: { href: string; label: string }[] = [
     { href: X_URL, label: f.columns.community.links.x },
-    { href: TELEGRAM_MAIN, label: f.columns.community.links.telegram },
-    { href: TELEGRAM_ALERTS_URL, label: f.columns.community.links.alerts },
   ];
   const legal: { href: string; label: string }[] = [
     { href: "/privacy", label: f.columns.legal.links.privacy },

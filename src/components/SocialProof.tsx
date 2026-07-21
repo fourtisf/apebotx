@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Marquee } from "@/components/ui/Marquee";
-import { TELEGRAM_ALERTS_URL } from "@/lib/site";
+import { X_URL } from "@/lib/site";
 
 const STACK = [
   "Solana",
@@ -12,7 +12,6 @@ const STACK = [
   "DexScreener",
   "RugCheck",
   "Birdeye",
-  "Telegram",
   "X / Twitter",
 ];
 
@@ -59,12 +58,12 @@ export function SocialProof() {
             </p>
 
             <a
-              href={TELEGRAM_ALERTS_URL}
+              href={X_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-accent underline-offset-4 hover:underline"
             >
-              See live signals on Telegram
+              Follow live signals on X
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </a>
           </div>

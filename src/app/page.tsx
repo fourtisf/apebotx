@@ -4,7 +4,6 @@ import { TrustStrip } from "@/components/TrustStrip";
 import { Problem } from "@/components/Problem";
 import { Features } from "@/components/Features";
 import { HowItWorks } from "@/components/HowItWorks";
-import { Channels } from "@/components/Channels";
 import { WhyOcolos } from "@/components/WhyOcolos";
 import { SocialProof } from "@/components/SocialProof";
 import { Pricing } from "@/components/Pricing";
@@ -21,7 +20,6 @@ export default function Home() {
         <Problem />
         <Features />
         <HowItWorks />
-        <Channels />
         <WhyOcolos />
         <SocialProof />
         <Pricing />

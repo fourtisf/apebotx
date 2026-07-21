@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { BotShowcase } from "./BotShowcase";
 import { StatCounter } from "./StatCounter";
+import { CaBadge } from "./CaBadge";
 
 export function Hero() {
   const { strings } = useStrings();
@@ -71,6 +72,12 @@ export function Hero() {
                     {h.ctaTerminal}
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Button>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.2}>
+                <div className="mt-5">
+                  <CaBadge />
                 </div>
               </Reveal>
 

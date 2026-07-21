@@ -7,7 +7,7 @@ export const en = {
   meta: {
     title: "Ocolos — Automate the smartest money on Solana",
     description:
-      "Solana-first memecoin smart-money bot. Score profitable wallets, segment them (Smart / Sniper / Insider / KOL), fuse anti-rug signals, and get real-time alerts on Telegram and X in your language. Powered by Fourtis.",
+      "Solana-first memecoin smart-money bot. Score profitable wallets, segment them (Smart / Sniper / Insider / KOL), fuse anti-rug signals, and auto-post real-time alpha straight to X. Powered by Fourtis.",
   },
 
   nav: {
@@ -29,14 +29,14 @@ export const en = {
     badge: "Solana-first smart-money bot",
     statusBeta: "Private beta",
     h1: "Automate the smartest money on Solana.",
-    sub: "Ocolos scores profitable on-chain wallets and fires the signal the second they ape in — segmented, anti-rug fused, and delivered on Telegram and X in your language.",
+    sub: "Ocolos scores profitable on-chain wallets and fires the signal the second they ape in — segmented, anti-rug fused, and auto-posted straight to X in real time.",
     ctaPrimary: "Get Early Access",
     ctaSecondary: "See how it works",
     ctaTerminal: "Open the terminal",
-    highlights: ["Sub-second alerts", "Telegram + X native", "Anti-rug fused"],
+    highlights: ["Real-time signals", "Auto-posted to X", "Anti-rug fused"],
     stats: {
       segments: { value: 4, decimals: 0, suffix: "", label: "Wallet segments" },
-      channels: { value: 2, decimals: 0, suffix: "", label: "Native channels (TG · X)" },
+      channels: { value: 24, decimals: 0, suffix: "/7", label: "Live monitoring" },
       languages: { value: 5, decimals: 0, suffix: "", label: "Languages at launch" },
     },
     feed: {
@@ -76,7 +76,7 @@ export const en = {
   features: {
     kicker: "What you get",
     title: "An edge built from on-chain truth.",
-    sub: "Six systems working together to turn raw Solana activity into decisions you can act on — pushed straight to Telegram and X.",
+    sub: "Six systems working together to turn raw Solana activity into decisions you can act on — auto-posted straight to X.",
     items: [
       {
         icon: "Crosshair",
@@ -100,8 +100,8 @@ export const en = {
       },
       {
         icon: "Send",
-        title: "Telegram + X Delivery",
-        body: "Sub-second alerts to Telegram the instant tracked wallets move, and auto-posted to X — no dashboards to babysit.",
+        title: "Auto-Posted to X",
+        body: "The instant a tracked wallet moves, Ocolos posts the highest-conviction signal straight to X — no dashboards to babysit, just alpha in your feed.",
       },
       {
         icon: "Languages",
@@ -125,7 +125,7 @@ export const en = {
       },
       {
         title: "You get the signal",
-        body: "The instant tracked money buys or sells, Ocolos fires a Telegram alert and posts the highest-conviction move to X — in your language, before the crowd.",
+        body: "The instant tracked money buys or sells, Ocolos posts the highest-conviction move straight to X — in real time, before the crowd.",
       },
     ],
   },
@@ -141,7 +141,7 @@ export const en = {
     },
     rows: [
       { label: "Wallet segmentation (Smart / Sniper / Insider / KOL)", ocolos: true, generic: false },
-      { label: "Telegram + X native, sub-second delivery", ocolos: true, generic: false },
+      { label: "Real-time signals auto-posted to X", ocolos: true, generic: false },
       { label: "Your language (EN / ID / RU / AR / ZH)", ocolos: true, generic: false },
       { label: "Anti-rug checks fused into every signal", ocolos: true, generic: false },
       { label: "Real-time smart-money inflow context", ocolos: true, generic: "Partial" },
@@ -176,9 +176,9 @@ export const en = {
   pricing: {
     kicker: "Pricing",
     title: "Start free. Upgrade when you're winning.",
-    sub: "Pay with Telegram Stars — no card, no friction.",
+    sub: "Simple pricing — upgrade when you're winning.",
     comingSoon: "Coming soon",
-    stars: "Pay with Telegram Stars",
+    stars: "No card. No friction.",
     plans: [
       {
         name: "Free",
@@ -188,7 +188,7 @@ export const en = {
         cta: "Get Early Access",
         features: [
           "Track a starter set of smart wallets",
-          "Core Telegram alerts",
+          "Core X signals",
           "Basic wallet segments",
           "Community channel access",
         ],
@@ -204,7 +204,7 @@ export const en = {
           "All segments + smart-money inflows",
           "Anti-rug fusion on every signal",
           "Priority sub-second delivery",
-          "Telegram + X, all languages, custom filters",
+          "All languages + custom filters",
         ],
       },
     ],
@@ -217,16 +217,16 @@ export const en = {
     placeholder: "you@email.com",
     cta: "Request access",
     sending: "Sending…",
-    success: "You're on the list. Watch your inbox — and Telegram.",
+    success: "You're on the list. Watch your inbox — and X.",
     errorInvalid: "Please enter a valid email address.",
     errorGeneric: "Something went wrong. Please try again.",
-    telegramPrompt: "Prefer Telegram? Join",
-    telegramCta: "@ocolossignals",
+    telegramPrompt: "Prefer X? Follow",
+    telegramCta: "@Ocolosxyz",
     disclaimer: "No spam. Unsubscribe anytime.",
   },
 
   footer: {
-    tagline: "The smart-money bot for Solana memecoins — live on Telegram and X. Independent brand, powered by Fourtis.",
+    tagline: "The smart-money bot for Solana memecoins — live on X. Independent brand, powered by Fourtis.",
     poweredBy: "powered by Fourtis",
     rights: "All rights reserved.",
     columns: {

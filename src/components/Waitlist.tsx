@@ -6,7 +6,7 @@ import { useStrings } from "@/lib/strings";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { TELEGRAM_ALERTS_URL } from "@/lib/site";
+import { X_URL } from "@/lib/site";
 import { track } from "@/lib/analytics";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -135,7 +135,7 @@ export function Waitlist() {
                 <p className="mt-6 text-sm text-text-muted">
                   {w.telegramPrompt}{" "}
                   <a
-                    href={TELEGRAM_ALERTS_URL}
+                    href={X_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-accent underline-offset-4 hover:underline"
