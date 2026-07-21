@@ -76,31 +76,31 @@ export interface StyleParts {
 
 export const STYLE_MAP: Record<string, (p: StyleParts) => string> = {
   classic: (p) =>
-    `👁 Ocolos spotted a ${p.whaleTag} ape ${p.amount} into ${p.tok}` +
-    (p.mc ? ` at ${p.mc} MC` : "") +
+    `👁 Caught on the tape — a ${p.whaleTag} slid ${p.amount} into ${p.tok}` +
+    (p.mc ? ` @ ${p.mc} MC` : "") +
     (p.wr ? ` · ${p.wr}% win-rate wallet` : ""),
   alert: (p) =>
-    `📡 On the radar — ${p.amount} flowing into ${p.tok}` +
-    (p.mc ? ` at ${p.mc} MC` : "") +
-    (p.wr ? ` from a ${p.wr}% win-rate wallet` : ""),
+    `📡 Signal locked · ${p.tok} — ${p.amount} just moved in` +
+    (p.mc ? ` @ ${p.mc} MC` : "") +
+    (p.wr ? ` · ${p.wr}% WR wallet` : ""),
   punchy: (p) =>
-    `👀 Eyes on ${p.tok} — a ${p.wr ? `${p.wr}% win-rate ` : ""}whale just loaded ${p.amount}` +
+    `🟣 ${p.tok} in the crosshairs — a ${p.wr ? `${p.wr}% WR ` : ""}wallet just loaded ${p.amount}` +
     (p.mc ? ` (${p.mc} MC)` : ""),
   conviction: (p) =>
-    `💎 Conviction buy: ${p.amount} of ${p.tok}` +
-    (p.mc ? ` at ${p.mc} MC` : "") +
-    (p.wr ? ` · ${p.wr}% win-rate wallet` : ""),
-  flow: (p) =>
-    `🎯 Tracked smart money → ${p.tok}: ${p.amount}` +
-    (p.mc ? ` at ${p.mc} MC` : "") +
+    `👁 The eye doesn't blink — ${p.amount} conviction buy on ${p.tok}` +
+    (p.mc ? ` @ ${p.mc} MC` : "") +
     (p.wr ? ` · ${p.wr}% WR wallet` : ""),
+  flow: (p) =>
+    `🎯 Following the money → ${p.amount} into ${p.tok}` +
+    (p.mc ? ` @ ${p.mc} MC` : "") +
+    (p.wr ? ` · ${p.wr}% WR` : ""),
   fomo: (p) =>
-    `🔥 ${p.tok} is heating up — smart money grabbed ${p.amount}` +
-    (p.mc ? ` at ${p.mc} MC` : "") +
-    (p.wr ? ` from a ${p.wr}% win-rate wallet` : ""),
+    `🔥 ${p.tok} is lighting up the radar — ${p.amount} of smart money just piled in` +
+    (p.mc ? ` @ ${p.mc} MC` : "") +
+    (p.wr ? ` from a ${p.wr}% WR wallet` : ""),
   minimal: (p) =>
-    `👁 ${p.amount} → ${p.tok}` +
-    (p.mc ? ` at ${p.mc} MC` : "") +
+    `👁 ${p.tok} ← ${p.amount}` +
+    (p.mc ? ` @ ${p.mc} MC` : "") +
     (p.wr ? ` · ${p.wr}% WR` : ""),
 };
 
