@@ -95,7 +95,7 @@ export default function OpengraphImage() {
             color: "#97a0ad",
           }}
         >
-          <div>ocolos.fun</div>
+          <div>ocolos.xyz</div>
           <div>powered by Fourtis</div>
         </div>
       </div>

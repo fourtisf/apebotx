@@ -45,10 +45,10 @@ Copy `.env.example` to `.env.local` (or set in your host):
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | recommended | Absolute base URL for canonical / OG / sitemap. Defaults to `https://ocolos.fun`. |
+| `NEXT_PUBLIC_SITE_URL` | recommended | Absolute base URL for canonical / OG / sitemap. Defaults to `https://ocolos.xyz`. |
 | `WAITLIST_WEBHOOK_URL` | optional | If set, `/api/waitlist` also forwards each validated signup here (e.g. Sheets/Zapier/CRM). |
 | `WAITLIST_FILE` | optional | Path to the durable JSONL file every signup is appended to. Defaults to `./data/waitlist.jsonl` (gitignored, survives restarts + deploys). |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | optional | Set to your site domain (e.g. `ocolos.fun`) to enable privacy-friendly Plausible analytics + the `Waitlist Signup` goal. |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | optional | Set to your site domain (e.g. `ocolos.xyz`) to enable privacy-friendly Plausible analytics + the `Waitlist Signup` goal. |
 
 The app runs fine with **no env vars** for local dev.
 
@@ -149,7 +149,7 @@ pm2 save && pm2 startup        # run the printed command for boot persistence
 ```
 
 Nginx reverse proxy (`/etc/nginx/sites-available/ocolos`) → `proxy_pass http://127.0.0.1:3000;`,
-then `certbot --nginx -d ocolos.fun -d www.ocolos.fun` for SSL. Full step-by-step
+then `certbot --nginx -d ocolos.xyz -d www.ocolos.xyz` for SSL. Full step-by-step
 lives in the deploy handoff.
 
 ### Redeploy

@@ -4,13 +4,13 @@
  * menu. Run once after deploy (and whenever the URL/secret changes).
  *
  *   TELEGRAM_BOT_TOKEN=... \
- *   NEXT_PUBLIC_SITE_URL=https://ocolos.fun \
+ *   NEXT_PUBLIC_SITE_URL=https://ocolos.xyz \
  *   TELEGRAM_WEBHOOK_SECRET=some-random-string \
  *   node scripts/setup-telegram-bot.mjs
  */
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const site =
-  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://ocolos.fun";
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://ocolos.xyz";
 const url = process.env.TELEGRAM_WEBHOOK_URL || `${site}/api/telegram/webhook`;
 const secret = process.env.TELEGRAM_WEBHOOK_SECRET || "";
 

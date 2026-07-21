@@ -5,7 +5,7 @@
  *
  * Usage (from the app dir):
  *   HELIUS_API_KEY=xxx \
- *   WEBHOOK_URL=https://ocolos.fun/api/ingest/helius \
+ *   WEBHOOK_URL=https://ocolos.xyz/api/ingest/helius \
  *   INGEST_SECRET=some-long-random-string \
  *   node scripts/setup-helius-webhook.mjs
  *

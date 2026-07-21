@@ -5,7 +5,7 @@ import { getMarketSnapshot } from "@/lib/server/marketLive";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://ocolos.fun";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://ocolos.xyz";
 const SIGNALS = process.env.TELEGRAM_SIGNALS_CHAT_ID || "@ocolossignals";
 
 type TgUpdate = {

@@ -129,7 +129,7 @@ export function BotShowcase() {
             <OcolosMonogram className="h-9 w-9 shrink-0" />
             <div className="flex min-w-0 items-center gap-1.5">
               <span className="text-sm font-semibold text-text">Ocolos</span>
-              <span className="truncate font-mono text-xs text-text-muted">@ocolos · now</span>
+              <span className="truncate font-mono text-xs text-text-muted">@Ocolosxyz · now</span>
             </div>
             <XLogo className="ml-auto h-4 w-4 text-text-muted" />
           </div>
