@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #
-# ApeBotX — VPS redeploy.
+# Ocolos — VPS redeploy.
 # Pulls latest code, installs deps, rebuilds, and reloads the PM2 process
-# with zero-downtime. Run from the app directory on the server (e.g. /var/www/apebotx).
+# with zero-downtime. Run from the app directory on the server (e.g. /var/www/ocolos).
 #
 # Usage:  ./deploy.sh
 #
 set -euo pipefail
 
-APP_NAME="apebotx"
+APP_NAME="ocolos"
 BRANCH="${DEPLOY_BRANCH:-main}"
 
 echo "▶ Deploying ${APP_NAME} (branch: ${BRANCH})"

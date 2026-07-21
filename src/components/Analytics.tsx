@@ -3,7 +3,7 @@ import Script from "next/script";
 /**
  * Privacy-friendly analytics. Renders nothing unless NEXT_PUBLIC_PLAUSIBLE_DOMAIN
  * is set, so local/dev builds stay clean. Set it to your site domain (e.g.
- * "apebotx.io") after creating a Plausible site to get pageviews + the
+ * "ocolos.fun") after creating a Plausible site to get pageviews + the
  * "Waitlist Signup" goal. Self-hosting? Point NEXT_PUBLIC_PLAUSIBLE_SRC at your
  * script URL.
  */

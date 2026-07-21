@@ -5,8 +5,8 @@ import { getMarketSnapshot } from "@/lib/server/marketLive";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://apebotx.io";
-const SIGNALS = process.env.TELEGRAM_SIGNALS_CHAT_ID || "@apebotxsignals";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://ocolos.fun";
+const SIGNALS = process.env.TELEGRAM_SIGNALS_CHAT_ID || "@ocolossignals";
 
 type TgUpdate = {
   message?: { chat?: { id?: number | string }; text?: string };
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   if (cmd === "/start") {
     await tgSend(
       chatId,
-      `👋 <b>ApeBotX</b> — the smart-money bot for Solana memecoins, live on Telegram &amp; X.\n\n` +
+      `👋 <b>Ocolos</b> — the smart-money bot for Solana memecoins, live on Telegram &amp; X.\n\n` +
         `📊 Live terminal: ${SITE}/terminal\n` +
         `🔔 Signals: ${SIGNALS}\n\n` +
         `Type /help for commands.`,
@@ -51,12 +51,12 @@ export async function POST(req: Request) {
         `/terminal — open the live terminal\n` +
         `/top — top trending tokens right now\n` +
         `/status — bot status\n` +
-        `/start — about ApeBotX`,
+        `/start — about Ocolos`,
     );
   } else if (cmd === "/status") {
     await tgSend(
       chatId,
-      `✅ <b>ApeBotX bot online.</b>\nTerminal: ${SITE}/terminal\nAlerts post to ${SIGNALS}.`,
+      `✅ <b>Ocolos bot online.</b>\nTerminal: ${SITE}/terminal\nAlerts post to ${SIGNALS}.`,
     );
   } else if (cmd === "/terminal") {
     await tgSend(chatId, `📊 Live terminal: ${SITE}/terminal`);
@@ -90,5 +90,5 @@ export async function POST(req: Request) {
 }
 
 export function GET() {
-  return NextResponse.json({ ok: true, message: "ApeBotX Telegram webhook." });
+  return NextResponse.json({ ok: true, message: "Ocolos Telegram webhook." });
 }

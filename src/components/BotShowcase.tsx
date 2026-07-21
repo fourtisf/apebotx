@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ShieldCheck, Heart, Repeat2, MessageCircle, BarChart3 } from "lucide-react";
-import { ApeBotXMonogram } from "@/components/Brand";
+import { OcolosMonogram } from "@/components/Brand";
 
 /** X (Twitter) brand mark. */
 function XLogo({ className }: { className?: string }) {
@@ -71,8 +71,8 @@ export function BotShowcase() {
                 <TelegramLogo className="h-4 w-4" />
               </span>
               <div className="leading-tight">
-                <div className="text-sm font-semibold text-text">ApeBotX Signals</div>
-                <div className="font-mono text-[0.62rem] text-text-muted">@apebotxsignals</div>
+                <div className="text-sm font-semibold text-text">Ocolos Signals</div>
+                <div className="font-mono text-[0.62rem] text-text-muted">@ocolossignals</div>
               </div>
             </div>
             <span className="inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-accent">
@@ -126,10 +126,10 @@ export function BotShowcase() {
       <div className="ml-auto w-[94%]">
         <div className="glass rounded-2xl p-4">
           <div className="flex items-center gap-2.5">
-            <ApeBotXMonogram className="h-9 w-9 shrink-0" />
+            <OcolosMonogram className="h-9 w-9 shrink-0" />
             <div className="flex min-w-0 items-center gap-1.5">
-              <span className="text-sm font-semibold text-text">ApeBotX</span>
-              <span className="truncate font-mono text-xs text-text-muted">@apebotx · now</span>
+              <span className="text-sm font-semibold text-text">Ocolos</span>
+              <span className="truncate font-mono text-xs text-text-muted">@ocolos · now</span>
             </div>
             <XLogo className="ml-auto h-4 w-4 text-text-muted" />
           </div>

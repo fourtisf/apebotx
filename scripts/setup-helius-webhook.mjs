@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
  * Register (create) a Helius "enhanced" webhook for the tracked smart wallets,
- * pointing at the ApeBotX ingest endpoint.
+ * pointing at the Ocolos ingest endpoint.
  *
  * Usage (from the app dir):
  *   HELIUS_API_KEY=xxx \
- *   WEBHOOK_URL=https://apebotx.io/api/ingest/helius \
+ *   WEBHOOK_URL=https://ocolos.fun/api/ingest/helius \
  *   INGEST_SECRET=some-long-random-string \
  *   node scripts/setup-helius-webhook.mjs
  *

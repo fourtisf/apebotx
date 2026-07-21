@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How ApeBotX handles your data.",
+  description: "How Ocolos handles your data.",
   robots: { index: false, follow: true },
 };
 
@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <LegalPage title="Privacy Policy" updated="June 2026">
       <p>
         {
-          "ApeBotX (“we”, “us”) is an independent analytics brand, powered by Fourtis. This policy explains what we collect on this website and how we use it. By using the site you agree to it."
+          "Ocolos (“we”, “us”) is an independent analytics brand, powered by Fourtis. This policy explains what we collect on this website and how we use it. By using the site you agree to it."
         }
       </p>
 
@@ -55,11 +55,11 @@ export default function PrivacyPage() {
       <p>
         {"Questions or requests? Reach the team via "}
         <a
-          href="https://t.me/apebotx"
+          href="https://t.me/ocolos"
           target="_blank"
           rel="noopener noreferrer"
         >
-          @apebotx
+          @ocolos
         </a>
         {" on Telegram."}
       </p>

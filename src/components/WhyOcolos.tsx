@@ -34,7 +34,7 @@ function Cell({
   );
 }
 
-export function WhyApeBotX() {
+export function WhyOcolos() {
   const { strings } = useStrings();
   const w = strings.why;
 
@@ -52,7 +52,7 @@ export function WhyApeBotX() {
                       {w.columns.feature}
                     </th>
                     <th className="relative px-4 py-4 text-center text-sm font-semibold sm:px-6">
-                      <span className="text-brand-gradient">{w.columns.apebotx}</span>
+                      <span className="text-brand-gradient">{w.columns.ocolos}</span>
                       <span
                         aria-hidden
                         className="pointer-events-none absolute inset-x-2 inset-y-0 -z-0 rounded-t-xl bg-[color:color-mix(in_srgb,var(--accent)_8%,transparent)]"
@@ -76,7 +76,7 @@ export function WhyApeBotX() {
                         {row.label}
                       </td>
                       <td className="bg-[color:color-mix(in_srgb,var(--accent)_6%,transparent)] px-4 py-4 text-center sm:px-6">
-                        <Cell value={row.apebotx} positive />
+                        <Cell value={row.ocolos} positive />
                       </td>
                       <td className="px-4 py-4 text-center sm:px-6">
                         <Cell value={row.generic} />

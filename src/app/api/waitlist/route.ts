@@ -70,7 +70,7 @@ export async function POST(request: Request) {
   const signup: Signup = {
     email: email.toLowerCase(),
     ts: new Date().toISOString(),
-    source: "apebotx-landing",
+    source: "ocolos-landing",
     locale,
     ref,
     ip:
@@ -116,6 +116,6 @@ export async function POST(request: Request) {
 export function GET() {
   return NextResponse.json({
     ok: true,
-    message: "POST an { email } to join the ApeBotX waitlist.",
+    message: "POST an { email } to join the Ocolos waitlist.",
   });
 }

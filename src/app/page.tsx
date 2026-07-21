@@ -5,7 +5,7 @@ import { Problem } from "@/components/Problem";
 import { Features } from "@/components/Features";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Channels } from "@/components/Channels";
-import { WhyApeBotX } from "@/components/WhyApeBotX";
+import { WhyOcolos } from "@/components/WhyOcolos";
 import { SocialProof } from "@/components/SocialProof";
 import { Pricing } from "@/components/Pricing";
 import { Waitlist } from "@/components/Waitlist";
@@ -22,7 +22,7 @@ export default function Home() {
         <Features />
         <HowItWorks />
         <Channels />
-        <WhyApeBotX />
+        <WhyOcolos />
         <SocialProof />
         <Pricing />
         <Waitlist />

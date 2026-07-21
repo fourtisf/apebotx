@@ -1,6 +1,6 @@
-# ApeBotX
+# Ocolos
 
-Premium dark marketing site + delivery engine for **ApeBotX** — a Solana-first
+Premium dark marketing site + delivery engine for **Ocolos** — a Solana-first
 memecoin **smart-money bot**. It scores profitable on-chain wallets and fires the
 signal the second they ape in, with wallet segmentation (Smart 🟢 / Sniper ⚡ /
 Insider 🔴 / KOL 🎤), anti-rug fusion, and native delivery on **Telegram and X**
@@ -45,10 +45,10 @@ Copy `.env.example` to `.env.local` (or set in your host):
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | recommended | Absolute base URL for canonical / OG / sitemap. Defaults to `https://apebotx.io`. |
+| `NEXT_PUBLIC_SITE_URL` | recommended | Absolute base URL for canonical / OG / sitemap. Defaults to `https://ocolos.fun`. |
 | `WAITLIST_WEBHOOK_URL` | optional | If set, `/api/waitlist` also forwards each validated signup here (e.g. Sheets/Zapier/CRM). |
 | `WAITLIST_FILE` | optional | Path to the durable JSONL file every signup is appended to. Defaults to `./data/waitlist.jsonl` (gitignored, survives restarts + deploys). |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | optional | Set to your site domain (e.g. `apebotx.io`) to enable privacy-friendly Plausible analytics + the `Waitlist Signup` goal. |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | optional | Set to your site domain (e.g. `ocolos.fun`) to enable privacy-friendly Plausible analytics + the `Waitlist Signup` goal. |
 
 The app runs fine with **no env vars** for local dev.
 
@@ -93,7 +93,7 @@ bot and stays a clean break from the old brand. The palette is deliberately
 (`--accent`) drives CTAs, links, badges, pulses, glows and focus states, while a
 luminous cyan (`--accent-2`) + a whisper of magenta (`--accent-3`) drive the aurora
 background and animated gradient borders. Single
-source of truth: `<ApeBotXMonogram />` / `<BrandLockup />` in
+source of truth: `<OcolosMonogram />` / `<BrandLockup />` in
 `src/components/Brand.tsx` (token-driven). Standalone files for press / external use:
 
 - `public/monogram.svg` — the mark on its own.
@@ -141,15 +141,15 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs nginx
 sudo npm i -g pm2
 
-# from /var/www/apebotx (rsync or git clone the repo here)
+# from /var/www/ocolos (rsync or git clone the repo here)
 npm ci
 npm run build
-pm2 start npm --name apebotx -- start
+pm2 start npm --name ocolos -- start
 pm2 save && pm2 startup        # run the printed command for boot persistence
 ```
 
-Nginx reverse proxy (`/etc/nginx/sites-available/apebotx`) → `proxy_pass http://127.0.0.1:3000;`,
-then `certbot --nginx -d apebotx.io -d www.apebotx.io` for SSL. Full step-by-step
+Nginx reverse proxy (`/etc/nginx/sites-available/ocolos`) → `proxy_pass http://127.0.0.1:3000;`,
+then `certbot --nginx -d ocolos.fun -d www.ocolos.fun` for SSL. Full step-by-step
 lives in the deploy handoff.
 
 ### Redeploy
@@ -157,7 +157,7 @@ lives in the deploy handoff.
 A one-shot redeploy script is included as [`deploy.sh`](./deploy.sh):
 
 ```bash
-./deploy.sh        # git pull → npm ci → npm run build → pm2 reload apebotx
+./deploy.sh        # git pull → npm ci → npm run build → pm2 reload ocolos
 ```
 
 ---
@@ -168,7 +168,7 @@ The `/terminal` runs in **DEMO** mode until the engine is wired. Then tracked-wa
 swaps flow in, the terminal goes **LIVE**, and Telegram alerts fire.
 
 **Flow:** curated wallets → Helius enhanced webhook → `POST /api/ingest/helius`
-→ parse swap → store + alert `@apebotxsignals` → `/terminal` polls `GET /api/terminal/feed`.
+→ parse swap → store + alert `@ocolossignals` → `/terminal` polls `GET /api/terminal/feed`.
 
 **Setup (on the server):**
 
@@ -178,7 +178,7 @@ swaps flow in, the terminal goes **LIVE**, and Telegram alerts fire.
    ```
 2. Set env (`.env`): `HELIUS_API_KEY`, `INGEST_SECRET`, `WEBHOOK_URL`,
    `TELEGRAM_BOT_TOKEN`, `TELEGRAM_SIGNALS_CHAT_ID` (bot must be admin of the channel),
-   optional `BUY_LINK_TEMPLATE`. Restart: `pm2 restart apebotx`.
+   optional `BUY_LINK_TEMPLATE`. Restart: `pm2 restart ocolos`.
 3. Register the webhook (one-off):
    ```bash
    node scripts/setup-helius-webhook.mjs
@@ -238,9 +238,9 @@ tick* posts at all. See `.env.example` for every knob.
    keys blank the channel stays in **dry-run** (composes + logs, never posts).
 2. Run the worker alongside the app:
    ```bash
-   pm2 start scripts/tweet-worker.mjs --name apebotx-tweets && pm2 save
+   pm2 start scripts/tweet-worker.mjs --name ocolos-tweets && pm2 save
    ```
-3. Tune strictness in `.env` (all `TWEET_*` vars) and `pm2 restart apebotx`.
+3. Tune strictness in `.env` (all `TWEET_*` vars) and `pm2 restart ocolos`.
 
 > The tweet gate is intentionally **much stricter** than the Telegram alert gate —
 > Telegram is a firehose for subscribers; the public timeline is curated so the

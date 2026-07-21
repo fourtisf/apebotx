@@ -17,7 +17,7 @@ const STACK = [
 ];
 
 /**
- * Trust band: real demand (live waitlist count) + the infrastructure ApeBotX is
+ * Trust band: real demand (live waitlist count) + the infrastructure Ocolos is
  * built on, scrolled in a seamless marquee. Honest — the count is the true
  * signup total; hidden until > 0.
  */

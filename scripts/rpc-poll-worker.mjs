@@ -8,12 +8,12 @@
  *
  * ⚠️  Pick ONE ingest mode. If you run the Helius webhook
  *     (scripts/setup-helius-webhook.mjs), STOP this worker —
- *     `pm2 stop apebotx-rpc` — because polling pulls every wallet every cycle
+ *     `pm2 stop ocolos-rpc` — because polling pulls every wallet every cycle
  *     regardless of activity, so a paid RPC (Helius) burns credits here. This
  *     worker is meant for the FREE public RPC, when you have no Helius webhook.
  *
- * Run under PM2 (alongside `apebotx` + `apebotx-alerts`):
- *   pm2 start scripts/rpc-poll-worker.mjs --name apebotx-rpc && pm2 save
+ * Run under PM2 (alongside `ocolos` + `ocolos-alerts`):
+ *   pm2 start scripts/rpc-poll-worker.mjs --name ocolos-rpc && pm2 save
  *
  * Tunables (env / .env): SOLANA_RPC_URL, RPC_POLL_INTERVAL_SEC (default 30),
  * RPC_SIGS_PER_WALLET, RPC_CALL_DELAY_MS, RPC_MAX_AGE_MIN, RPC_MAX_WALLETS.
@@ -45,6 +45,6 @@ async function tick() {
   }
 }
 
-console.log(`ApeBotX RPC poll worker → ${url} every ${intervalMs / 1000}s`);
+console.log(`Ocolos RPC poll worker → ${url} every ${intervalMs / 1000}s`);
 tick();
 setInterval(tick, intervalMs);

@@ -4,7 +4,7 @@
  * so the auto-tweet channel keeps posting (at most one, strictly-gated tweet per
  * tick) without anyone viewing the app. Run under PM2:
  *
- *   pm2 start scripts/tweet-worker.mjs --name apebotx-tweets && pm2 save
+ *   pm2 start scripts/tweet-worker.mjs --name ocolos-tweets && pm2 save
  *
  * The dispatcher enforces its own pacing (min spacing + per-hour/day caps), so a
  * short poll interval here just means it *checks* often — it never over-posts.
@@ -26,6 +26,6 @@ async function tick() {
   }
 }
 
-console.log(`ApeBotX tweet worker → ${url} every ${intervalMs / 1000}s`);
+console.log(`Ocolos tweet worker → ${url} every ${intervalMs / 1000}s`);
 tick();
 setInterval(tick, intervalMs);

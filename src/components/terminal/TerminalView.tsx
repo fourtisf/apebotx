@@ -63,7 +63,7 @@ function tokenHref(e: Row): string {
 }
 
 /**
- * ApeBotX Terminal — a premium, live-looking smart-money dashboard.
+ * Ocolos Terminal — a premium, live-looking smart-money dashboard.
  * Data is MOCK (sample / private beta). TODO: wire to the real scoring engine
  * + on-chain (Helius/Geyser) stream before public launch.
  */
@@ -202,7 +202,7 @@ export function TerminalView() {
             <Link
               href="/"
               className="-m-1 rounded-lg p-1"
-              aria-label="ApeBotX home"
+              aria-label="Ocolos home"
             >
               <BrandLockup />
             </Link>
@@ -579,7 +579,7 @@ export function TerminalView() {
         <div className="glass mt-4 flex flex-col items-center justify-between gap-4 px-6 py-5 text-center sm:flex-row sm:text-left">
           <div>
             <div className="font-display text-base font-semibold text-text">
-              This is a sample of the ApeBotX terminal.
+              This is a sample of the Ocolos terminal.
             </div>
             <div className="mt-1 text-sm text-text-muted">
               Live wallet scoring, anti-rug alerts and inflows ship to early

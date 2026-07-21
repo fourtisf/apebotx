@@ -11,13 +11,13 @@ import {
   X_HANDLE,
 } from "@/lib/site";
 
-const TITLE = "ApeBotX — Automate the smartest money on Solana";
+const TITLE = "Ocolos — Automate the smartest money on Solana";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: "%s · ApeBotX",
+    template: "%s · Ocolos",
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "X crypto alerts",
     "anti-rug",
     "Solana memecoins",
-    "ApeBotX",
+    "Ocolos",
     "Fourtis",
   ],
   authors: [{ name: "Fourtis", url: "https://fourtis.io" }],

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "ApeBotX — Solana smart-money bot for Telegram & X";
+export const alt = "Ocolos — Solana smart-money bot for Telegram & X";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -65,7 +65,7 @@ export default function OpengraphImage() {
               />
             </svg>
           </div>
-          <div style={{ fontSize: 38, fontWeight: 700 }}>ApeBotX</div>
+          <div style={{ fontSize: 38, fontWeight: 700 }}>Ocolos</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
@@ -95,7 +95,7 @@ export default function OpengraphImage() {
             color: "#97a0ad",
           }}
         >
-          <div>apebotx.io</div>
+          <div>ocolos.fun</div>
           <div>powered by Fourtis</div>
         </div>
       </div>

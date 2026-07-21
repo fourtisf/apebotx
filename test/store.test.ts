@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 // Isolate the store to a throwaway file, then import it (dynamic, so the env is
 // set before the module captures EVENTS_FILE).
-process.env.EVENTS_FILE = `/tmp/apebotx-test-${Date.now()}-${Math.random()
+process.env.EVENTS_FILE = `/tmp/ocolos-test-${Date.now()}-${Math.random()
   .toString(36)
   .slice(2)}.jsonl`;
 const { addEvents, allEvents } = await import("../src/lib/server/store.ts");

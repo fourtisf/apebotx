@@ -5,8 +5,8 @@
  * from the current directory itself and signs with OAuth 1.0a via node:crypto.
  * Mirrors the signing in src/lib/server/twitter.ts.
  *
- *   cd /var/www/apebotx    # dir that has .env.local
- *   node scripts/tweet-test.mjs "hello from the apebotx bot"
+ *   cd /var/www/ocolos    # dir that has .env.local
+ *   node scripts/tweet-test.mjs "hello from the ocolos bot"
  *
  * Exits 0 on a posted tweet, 1 on any failure (missing keys, 401/403, etc.).
  */
@@ -100,7 +100,7 @@ function authHeader(method, url) {
 
 const text =
   process.argv.slice(2).join(" ") ||
-  `apebotx auto-tweet test ✅ ${new Date().toISOString()}`;
+  `ocolos auto-tweet test ✅ ${new Date().toISOString()}`;
 const url = "https://api.twitter.com/2/tweets";
 
 const res = await fetch(url, {

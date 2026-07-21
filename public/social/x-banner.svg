@@ -34,7 +34,7 @@
   </g>
 
   <!-- left column, tidy rhythm -->
-  <text x="90" y="196" font-size="116" font-weight="bold" letter-spacing="1" fill="#f4f3f8"><tspan fill="url(#emW)">APE</tspan>BOT<tspan fill="url(#emW)">X</tspan></text>
+  <text x="90" y="196" font-size="116" font-weight="bold" letter-spacing="1" fill="#f4f3f8"><tspan fill="url(#emW)">OCO</tspan>LOS</text>
   <text x="94" y="252" font-size="33" font-weight="bold" fill="#a3a0b5" letter-spacing="0.4">Smart-money bot for Solana — Telegram &amp; X</text>
 
   <rect x="95" y="286" width="452" height="2.5" rx="1" fill="#7c4dff" opacity="0.42"/>
@@ -45,5 +45,5 @@
     <circle cx="470" cy="-7" r="5.5" fill="#7c4dff"/><text x="485" y="0" fill="#cabfe6">24/7 autonomous</text>
   </g>
 
-  <text x="95" y="392" font-size="26" font-weight="bold" fill="#7c4dff" letter-spacing="0.8">@apebotx<tspan fill="#6c6984" font-size="21" letter-spacing="1.5" dx="22">SOLANA · BSC · BASE · ETH · TRON</tspan></text>
+  <text x="95" y="392" font-size="26" font-weight="bold" fill="#7c4dff" letter-spacing="0.8">@ocolos<tspan fill="#6c6984" font-size="21" letter-spacing="1.5" dx="22">SOLANA · BSC · BASE · ETH · TRON</tspan></text>
 </svg>

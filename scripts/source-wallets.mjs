@@ -399,5 +399,5 @@ console.log(
     `(winrate ${stracker.length}, pnl ${birdeye.length}, toptrader ${bdtop.length}, active ${active.length}, gmgn ${gmgn.length}, manual ${manual.length}).`,
 );
 console.log(
-  "Restart so the workers pick up the set:  pm2 restart apebotx apebotx-rpc",
+  "Restart so the workers pick up the set:  pm2 restart ocolos ocolos-rpc",
 );

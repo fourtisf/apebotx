@@ -4,7 +4,7 @@
  * notable trades get posted to the signals channel without anyone viewing the
  * terminal. Run under PM2:
  *
- *   pm2 start scripts/alert-worker.mjs --name apebotx-alerts && pm2 save
+ *   pm2 start scripts/alert-worker.mjs --name ocolos-alerts && pm2 save
  */
 const port = process.env.PORT || 3000;
 const secret = process.env.INGEST_SECRET || "";
@@ -23,6 +23,6 @@ async function tick() {
   }
 }
 
-console.log(`ApeBotX alert worker → ${url} every ${intervalMs / 1000}s`);
+console.log(`Ocolos alert worker → ${url} every ${intervalMs / 1000}s`);
 tick();
 setInterval(tick, intervalMs);

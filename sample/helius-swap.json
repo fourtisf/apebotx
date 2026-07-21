@@ -4,12 +4,12 @@
     "type": "SWAP",
     "events": {
       "swap": {
-        "nativeInput": { "account": "SampLeApeBotXWa11etDemo111111111111111111111", "amount": "2500000000" },
+        "nativeInput": { "account": "SampLeOcolosWa11etDemo111111111111111111111", "amount": "2500000000" },
         "nativeOutput": null,
         "tokenInputs": [],
         "tokenOutputs": [
           {
-            "userAccount": "SampLeApeBotXWa11etDemo111111111111111111111",
+            "userAccount": "SampLeOcolosWa11etDemo111111111111111111111",
             "mint": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
             "rawTokenAmount": { "tokenAmount": "1234567000000", "decimals": 5 }
           }
@@ -23,10 +23,10 @@
     "events": {
       "swap": {
         "nativeInput": null,
-        "nativeOutput": { "account": "SampLeApeBotXWa11etDemo111111111111111111111", "amount": "1200000000" },
+        "nativeOutput": { "account": "SampLeOcolosWa11etDemo111111111111111111111", "amount": "1200000000" },
         "tokenInputs": [
           {
-            "userAccount": "SampLeApeBotXWa11etDemo111111111111111111111",
+            "userAccount": "SampLeOcolosWa11etDemo111111111111111111111",
             "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
             "rawTokenAmount": { "tokenAmount": "5000000000", "decimals": 6 }
           }

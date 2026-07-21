@@ -4,7 +4,7 @@ import type { LocaleDict } from "./types";
  *  TODO: complete translation pass before launching the ZH market. */
 export const zh: LocaleDict = {
   meta: {
-    title: "ApeBotX — 自动跟随 Solana 上最聪明的资金",
+    title: "Ocolos — 自动跟随 Solana 上最聪明的资金",
     description:
       "面向 Solana 的 memecoin 聪明钱机器人。为盈利钱包评分并分类（聪明 / 狙击 / 内部 / KOL），并以你的语言通过 Telegram 和 X 实时推送提醒。由 Fourtis 提供支持。",
   },
@@ -20,7 +20,7 @@ export const zh: LocaleDict = {
   hero: {
     badge: "Solana 聪明钱机器人",
     h1: "自动跟随 Solana 上最聪明的资金。",
-    sub: "ApeBotX 为盈利的链上钱包评分，并在它们买入的那一刻发出信号——已分类、融合防 rug 检测，并以你的语言通过 Telegram 和 X 直达。",
+    sub: "Ocolos 为盈利的链上钱包评分，并在它们买入的那一刻发出信号——已分类、融合防 rug 检测，并以你的语言通过 Telegram 和 X 直达。",
     ctaPrimary: "获取抢先体验",
     ctaSecondary: "了解运作方式",
   },

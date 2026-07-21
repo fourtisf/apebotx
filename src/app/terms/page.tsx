@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "The terms for using ApeBotX.",
+  description: "The terms for using Ocolos.",
   robots: { index: false, follow: true },
 };
 
@@ -12,14 +12,14 @@ export default function TermsPage() {
     <LegalPage title="Terms of Service" updated="June 2026">
       <p>
         {
-          "These terms govern your use of the ApeBotX website and product (the “Service”). By using the Service you agree to them. ApeBotX is an independent brand, powered by Fourtis."
+          "These terms govern your use of the Ocolos website and product (the “Service”). By using the Service you agree to them. Ocolos is an independent brand, powered by Fourtis."
         }
       </p>
 
       <h2>No financial advice</h2>
       <p>
         {
-          "ApeBotX provides on-chain analytics, scoring and alerts for informational purposes only. Nothing in the Service is financial, investment, legal, or tax advice, an offer, or a recommendation to buy or sell any asset. Crypto assets — memecoins especially — are extremely volatile and can go to zero. You make your own decisions and trade entirely at your own risk."
+          "Ocolos provides on-chain analytics, scoring and alerts for informational purposes only. Nothing in the Service is financial, investment, legal, or tax advice, an offer, or a recommendation to buy or sell any asset. Crypto assets — memecoins especially — are extremely volatile and can go to zero. You make your own decisions and trade entirely at your own risk."
         }
       </p>
 
@@ -54,7 +54,7 @@ export default function TermsPage() {
       <h2>Liability</h2>
       <p>
         {
-          "To the maximum extent permitted by law, the Service is provided “as is” without warranties, and ApeBotX and Fourtis are not liable for any trading losses or damages arising from your use of it."
+          "To the maximum extent permitted by law, the Service is provided “as is” without warranties, and Ocolos and Fourtis are not liable for any trading losses or damages arising from your use of it."
         }
       </p>
 
@@ -62,11 +62,11 @@ export default function TermsPage() {
       <p>
         {"Questions? Reach us via "}
         <a
-          href="https://t.me/apebotx"
+          href="https://t.me/ocolos"
           target="_blank"
           rel="noopener noreferrer"
         >
-          @apebotx
+          @ocolos
         </a>
         {" on Telegram."}
       </p>

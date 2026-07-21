@@ -34,7 +34,7 @@ export async function tgSend(
   }
 }
 
-/** Post to the signals channel (TELEGRAM_SIGNALS_CHAT_ID, e.g. @apebotxsignals). */
+/** Post to the signals channel (TELEGRAM_SIGNALS_CHAT_ID, e.g. @ocolossignals). */
 export async function postToChannel(
   text: string,
   replyMarkup?: unknown,

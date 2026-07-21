@@ -5,13 +5,13 @@
  */
 export const en = {
   meta: {
-    title: "ApeBotX — Automate the smartest money on Solana",
+    title: "Ocolos — Automate the smartest money on Solana",
     description:
       "Solana-first memecoin smart-money bot. Score profitable wallets, segment them (Smart / Sniper / Insider / KOL), fuse anti-rug signals, and get real-time alerts on Telegram and X in your language. Powered by Fourtis.",
   },
 
   nav: {
-    brand: "ApeBotX",
+    brand: "Ocolos",
     poweredBy: "powered by Fourtis",
     links: {
       features: "Features",
@@ -29,7 +29,7 @@ export const en = {
     badge: "Solana-first smart-money bot",
     statusBeta: "Private beta",
     h1: "Automate the smartest money on Solana.",
-    sub: "ApeBotX scores profitable on-chain wallets and fires the signal the second they ape in — segmented, anti-rug fused, and delivered on Telegram and X in your language.",
+    sub: "Ocolos scores profitable on-chain wallets and fires the signal the second they ape in — segmented, anti-rug fused, and delivered on Telegram and X in your language.",
     ctaPrimary: "Get Early Access",
     ctaSecondary: "See how it works",
     ctaTerminal: "Open the terminal",
@@ -117,7 +117,7 @@ export const en = {
     steps: [
       {
         title: "We score the wallets",
-        body: "ApeBotX ingests Solana activity and ranks wallets by realized profit, win-rate and behavior — then segments each one.",
+        body: "Ocolos ingests Solana activity and ranks wallets by realized profit, win-rate and behavior — then segments each one.",
       },
       {
         title: "We fuse the context",
@@ -125,34 +125,34 @@ export const en = {
       },
       {
         title: "You get the signal",
-        body: "The instant tracked money buys or sells, ApeBotX fires a Telegram alert and posts the highest-conviction move to X — in your language, before the crowd.",
+        body: "The instant tracked money buys or sells, Ocolos fires a Telegram alert and posts the highest-conviction move to X — in your language, before the crowd.",
       },
     ],
   },
 
   why: {
-    kicker: "Why ApeBotX",
+    kicker: "Why Ocolos",
     title: "Not another generic tracker.",
     sub: "The difference is segmentation, delivery and fusion — the things that actually change your entry.",
     columns: {
       feature: "Capability",
-      apebotx: "ApeBotX",
+      ocolos: "Ocolos",
       generic: "Generic trackers",
     },
     rows: [
-      { label: "Wallet segmentation (Smart / Sniper / Insider / KOL)", apebotx: true, generic: false },
-      { label: "Telegram + X native, sub-second delivery", apebotx: true, generic: false },
-      { label: "Your language (EN / ID / RU / AR / ZH)", apebotx: true, generic: false },
-      { label: "Anti-rug checks fused into every signal", apebotx: true, generic: false },
-      { label: "Real-time smart-money inflow context", apebotx: true, generic: "Partial" },
-      { label: "Multi-chain roadmap (SOL · BSC · Base · ETH · Tron)", apebotx: true, generic: "Partial" },
+      { label: "Wallet segmentation (Smart / Sniper / Insider / KOL)", ocolos: true, generic: false },
+      { label: "Telegram + X native, sub-second delivery", ocolos: true, generic: false },
+      { label: "Your language (EN / ID / RU / AR / ZH)", ocolos: true, generic: false },
+      { label: "Anti-rug checks fused into every signal", ocolos: true, generic: false },
+      { label: "Real-time smart-money inflow context", ocolos: true, generic: "Partial" },
+      { label: "Multi-chain roadmap (SOL · BSC · Base · ETH · Tron)", ocolos: true, generic: "Partial" },
     ],
   },
 
   channels: {
     kicker: "Where it runs",
     title: "One bot. Every channel that matters.",
-    sub: "ApeBotX meets the market where it already lives — real-time on Telegram, curated on X. Same engine, two native surfaces.",
+    sub: "Ocolos meets the market where it already lives — real-time on Telegram, curated on X. Same engine, two native surfaces.",
     items: [
       {
         icon: "Telegram",
@@ -212,7 +212,7 @@ export const en = {
 
   waitlist: {
     kicker: "Early access",
-    title: "Get on the ApeBotX waitlist.",
+    title: "Get on the Ocolos waitlist.",
     sub: "Be first when we open the gates. Early members get founding-member pricing and priority alerts.",
     placeholder: "you@email.com",
     cta: "Request access",
@@ -221,7 +221,7 @@ export const en = {
     errorInvalid: "Please enter a valid email address.",
     errorGeneric: "Something went wrong. Please try again.",
     telegramPrompt: "Prefer Telegram? Join",
-    telegramCta: "@apebotxsignals",
+    telegramCta: "@ocolossignals",
     disclaimer: "No spam. Unsubscribe anytime.",
   },
 
