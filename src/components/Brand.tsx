@@ -1,11 +1,11 @@
 import { cn } from "@/lib/cn";
 
 /**
- * ApeBotX mark — an upward "apex" chevron (the A of Ape, smart-money up-only)
- * crowned by a glowing signal node (the bot's beacon), in premium emerald→teal
- * (`--brand-hi → --brand-lo → --accent-2`, lit from the top) on a pure-black,
- * borderless tile with a soft emerald glow. Reads as an A, a signal antenna and
- * a bot at once; stays legible down to favicon sizes. Themeable via brand tokens.
+ * ApeBotX mark — a geometric **bot head**: a hexagon head with two eyes, a small
+ * mouth, and an antenna crowned by a glowing signal-beacon node. In electric
+ * violet→cyan (`--brand-hi → --brand → --accent-2`), lit from the top, with a
+ * soft glow. Reads instantly as "bot" and stays legible down to favicon sizes.
+ * No enclosing tile — the mark floats — so it's a clean break from the old brand.
  */
 export function ApeBotXMonogram({ className }: { className?: string }) {
   return (
@@ -30,36 +30,47 @@ export function ApeBotXMonogram({ className }: { className?: string }) {
           height="200%"
           colorInterpolationFilters="sRGB"
         >
-          <feGaussianBlur in="SourceGraphic" stdDeviation="0.7" result="b" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="b" />
           <feMerge>
-            <feMergeNode in="b" />
             <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
-      {/* pure-black, borderless tile */}
-      <rect x="0" y="0" width="32" height="32" rx="9" fill="#000000" />
-      <g
-        filter="url(#apebotx-glow)"
-        stroke="url(#apebotx-brand)"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        {/* apex chevron — the "A" of Ape, rising */}
-        <path d="M7 25 L16 9.4 L25 25" />
-        {/* crossbar */}
-        <path d="M11.4 18.4 H20.6" />
+      <g filter="url(#apebotx-glow)">
+        {/* antenna + signal beacon */}
+        <circle cx="16" cy="4.4" r="1.7" fill="url(#apebotx-brand)" />
+        <line
+          x1="16"
+          y1="6"
+          x2="16"
+          y2="8.7"
+          stroke="url(#apebotx-brand)"
+          strokeWidth="1.9"
+          strokeLinecap="round"
+        />
+        {/* hexagon head */}
+        <path
+          d="M16 8.7 L24.7 13.35 L24.7 22 L16 26.7 L7.3 22 L7.3 13.35 Z"
+          fill="none"
+          stroke="url(#apebotx-brand)"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        {/* eyes */}
+        <circle cx="12.6" cy="17.2" r="1.7" fill="url(#apebotx-brand)" />
+        <circle cx="19.4" cy="17.2" r="1.7" fill="url(#apebotx-brand)" />
+        {/* mouth */}
+        <line
+          x1="13"
+          y1="21.6"
+          x2="19"
+          y2="21.6"
+          stroke="url(#apebotx-brand)"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+        />
       </g>
-      {/* signal beacon node crowning the apex (the "bot") */}
-      <circle
-        cx="16"
-        cy="6.4"
-        r="2.15"
-        fill="url(#apebotx-brand)"
-        filter="url(#apebotx-glow)"
-      />
     </svg>
   );
 }

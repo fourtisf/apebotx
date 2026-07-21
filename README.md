@@ -84,11 +84,12 @@ All tokens live as CSS variables in `src/app/globals.css` (`--bg`, `--surface`,
 
 ### Brand assets
 
-The logo is an **apex chevron** — an upward `A` (the *Ape*, smart-money up-only)
-crowned by a glowing **signal-beacon node** (the *bot*), in a premium electric
-violet→cyan `--brand-hi → --brand → --accent-2` gradient on a **pure-black,
-borderless tile** with a soft violet glow. It reads as an A, a signal antenna and
-a bot at once. The palette is deliberately **not emerald** — electric violet
+The logo is a geometric **bot head** — a hexagon head with two eyes and a small
+mouth, crowned by an antenna and a glowing **signal-beacon node**, in a premium
+electric violet→cyan `--brand-hi → --brand → --accent-2` gradient with a soft
+violet glow. The mark **floats** (no enclosing tile) so it reads instantly as a
+bot and stays a clean break from the old brand. The palette is deliberately
+**not emerald** — electric violet
 (`--accent`) drives CTAs, links, badges, pulses, glows and focus states, while a
 luminous cyan (`--accent-2`) + a whisper of magenta (`--accent-3`) drive the aurora
 background and animated gradient borders. Single

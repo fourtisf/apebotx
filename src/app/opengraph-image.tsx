@@ -25,17 +25,15 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
-              width: 62,
-              height: 62,
-              borderRadius: 17,
-              background: "#000000",
-              boxShadow: "0 0 26px rgba(36,229,166,0.55)",
+              width: 66,
+              height: 66,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              filter: "drop-shadow(0 0 18px rgba(124,77,255,0.6))",
             }}
           >
-            <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+            <svg width="60" height="60" viewBox="0 0 32 32" fill="none">
               <defs>
                 <linearGradient id="og-brand" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0" stopColor="#a98bff" />
@@ -43,20 +41,28 @@ export default function OpengraphImage() {
                   <stop offset="1" stopColor="#22d3ee" />
                 </linearGradient>
               </defs>
+              <circle cx="16" cy="4.4" r="1.7" fill="url(#og-brand)" />
               <path
-                d="M7 25 L16 9.4 L25 25"
+                d="M16 6 V8.7"
                 stroke="url(#og-brand)"
-                strokeWidth="3"
+                strokeWidth="1.9"
                 strokeLinecap="round"
+              />
+              <path
+                d="M16 8.7 L24.7 13.35 L24.7 22 L16 26.7 L7.3 22 L7.3 13.35 Z"
+                fill="none"
+                stroke="url(#og-brand)"
+                strokeWidth="2"
                 strokeLinejoin="round"
               />
+              <circle cx="12.6" cy="17.2" r="1.7" fill="url(#og-brand)" />
+              <circle cx="19.4" cy="17.2" r="1.7" fill="url(#og-brand)" />
               <path
-                d="M11.4 18.4 H20.6"
+                d="M13 21.6 H19"
                 stroke="url(#og-brand)"
-                strokeWidth="3"
+                strokeWidth="1.7"
                 strokeLinecap="round"
               />
-              <circle cx="16" cy="6.4" r="2.2" fill="url(#og-brand)" />
             </svg>
           </div>
           <div style={{ fontSize: 38, fontWeight: 700 }}>ApeBotX</div>

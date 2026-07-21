@@ -6,7 +6,7 @@
     <linearGradient id="em" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#a98bff"/><stop offset="55%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#22d3ee"/>
     </linearGradient>
-    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="soft" x="-90%" y="-90%" width="280%" height="280%"><feGaussianBlur stdDeviation="20"/></filter>
   </defs>
 
@@ -14,11 +14,12 @@
   <ellipse cx="200" cy="196" rx="118" ry="120" fill="#7c4dff" opacity="0.22" filter="url(#soft)"/>
   <circle cx="200" cy="200" r="182" fill="none" stroke="#7c4dff" stroke-width="2" opacity="0.16"/>
 
-  <g transform="translate(200,200) scale(9) translate(-16,-16)" filter="url(#glow)">
-    <g fill="none" stroke="url(#em)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M7 25 L16 9.4 L25 25"/>
-      <path d="M11.4 18.4 H20.6"/>
-    </g>
-    <circle cx="16" cy="6.4" r="2.15" fill="url(#em)"/>
+  <g transform="translate(200,200) scale(8.5) translate(-16,-15.5)" filter="url(#glow)">
+    <circle cx="16" cy="4.4" r="1.7" fill="url(#em)"/>
+    <line x1="16" y1="6" x2="16" y2="8.7" stroke="url(#em)" stroke-width="1.9" stroke-linecap="round"/>
+    <path d="M16 8.7 L24.7 13.35 L24.7 22 L16 26.7 L7.3 22 L7.3 13.35 Z" fill="none" stroke="url(#em)" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="12.6" cy="17.2" r="1.7" fill="url(#em)"/>
+    <circle cx="19.4" cy="17.2" r="1.7" fill="url(#em)"/>
+    <line x1="13" y1="21.6" x2="19" y2="21.6" stroke="url(#em)" stroke-width="1.7" stroke-linecap="round"/>
   </g>
 </svg>

@@ -23,13 +23,14 @@
   <ellipse cx="1245" cy="250" rx="410" ry="340" fill="url(#aura)"/>
   <path d="M40 405 L300 368 L470 392 L660 300 L840 338 L1010 214 L1180 252 L1470 92" fill="none" stroke="#7c4dff" stroke-width="3" opacity="0.13"/>
 
-  <!-- apex-chevron mark (right) -->
-  <g transform="translate(1170,150) scale(5.2)" filter="url(#glow)">
-    <g fill="none" stroke="url(#em)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M7 25 L16 9.4 L25 25"/>
-      <path d="M11.4 18.4 H20.6"/>
-    </g>
-    <circle cx="16" cy="6.4" r="2.15" fill="url(#em)"/>
+  <!-- bot-head mark (right) -->
+  <g transform="translate(1176,150) scale(5.2)" filter="url(#glow)">
+    <circle cx="16" cy="4.4" r="1.7" fill="url(#em)"/>
+    <line x1="16" y1="6" x2="16" y2="8.7" stroke="url(#em)" stroke-width="1.9" stroke-linecap="round"/>
+    <path d="M16 8.7 L24.7 13.35 L24.7 22 L16 26.7 L7.3 22 L7.3 13.35 Z" fill="none" stroke="url(#em)" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="12.6" cy="17.2" r="1.7" fill="url(#em)"/>
+    <circle cx="19.4" cy="17.2" r="1.7" fill="url(#em)"/>
+    <line x1="13" y1="21.6" x2="19" y2="21.6" stroke="url(#em)" stroke-width="1.7" stroke-linecap="round"/>
   </g>
 
   <!-- left column, tidy rhythm -->

@@ -8,7 +8,6 @@
     <path d="M0 157.5 H1200 M0 315 H1200 M0 472.5 H1200"/>
     <path d="M300 0 V630 M600 0 V630 M900 0 V630"/>
   </g>
-  <!-- mark + kicker -->
   <defs>
     <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#a98bff"/>
@@ -16,17 +15,18 @@
       <stop offset="1" stop-color="#22d3ee"/>
     </linearGradient>
     <filter id="g" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="0.85" result="bl"/>
-      <feMerge><feMergeNode in="bl"/><feMergeNode in="bl"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="bl"/>
+      <feMerge><feMergeNode in="bl"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <g transform="translate(96,120) scale(2.75)">
-    <rect x="0" y="0" width="32" height="32" rx="9" fill="#000000"/>
-    <g filter="url(#g)">
-      <path d="M7 25 L16 9.4 L25 25" stroke="url(#b)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M11.4 18.4 H20.6" stroke="url(#b)" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="16" cy="6.4" r="2.15" fill="url(#b)"/>
-    </g>
+  <!-- bot-head mark -->
+  <g transform="translate(96,116) scale(2.9)" filter="url(#g)">
+    <circle cx="16" cy="4.4" r="1.7" fill="url(#b)"/>
+    <line x1="16" y1="6" x2="16" y2="8.7" stroke="url(#b)" stroke-width="1.9" stroke-linecap="round"/>
+    <path d="M16 8.7 L24.7 13.35 L24.7 22 L16 26.7 L7.3 22 L7.3 13.35 Z" fill="none" stroke="url(#b)" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="12.6" cy="17.2" r="1.7" fill="url(#b)"/>
+    <circle cx="19.4" cy="17.2" r="1.7" fill="url(#b)"/>
+    <line x1="13" y1="21.6" x2="19" y2="21.6" stroke="url(#b)" stroke-width="1.7" stroke-linecap="round"/>
   </g>
   <text x="208" y="158" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="26" letter-spacing="6" fill="#c9bcff">SMART-MONEY BOT · SOLANA · TELEGRAM + X</text>
   <text x="200" y="196" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="24" letter-spacing="2" fill="#f3f5f7" font-weight="600">ApeBotX</text>
