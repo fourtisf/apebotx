@@ -92,9 +92,9 @@ test("cashtag: legal symbols get a $, weird ones fall back", () => {
 });
 
 // ── copy ────────────────────────────────────────────────────────────────────
-test("buildTweet: Moby-style line with win-rate flair", () => {
+test("buildTweet: Ocolos-style line with win-rate flair", () => {
   const t = buildTweet(ev(), quality(), cfg());
-  assert.match(t, /^🐳 A smart-money whale just bought \$25K of \$PEPE at \$2M MC/);
+  assert.match(t, /^👁 Ocolos spotted a smart-money whale ape \$25K into \$PEPE at \$2M MC/);
   assert.match(t, /75% win-rate wallet/);
   assert.ok(t.length <= 280);
 });
