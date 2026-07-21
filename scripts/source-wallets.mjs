@@ -9,8 +9,10 @@
  *   node scripts/source-wallets.mjs
  *
  * Sources (all fail-soft — a dead source never aborts the run):
- *   1. Solana Tracker top traders by WIN RATE — best "high win-rate" signal.
+ *   1. Solana Tracker top traders by WIN RATE + PnL — best "high win-rate" signal.
  *      Free key (data.solanatracker.io). Needs SOLANATRACKER_API_KEY.
+ *   1b. Solana Tracker top traders of TRENDING TOKENS — SAME key, hundreds of
+ *      wallets (top-traders/all alone is a small ~40 global pool).
  *   2. Birdeye top traders by PnL — high quality, no Cloudflare.
  *      Needs BIRDEYE_API_KEY. Runs several timeframes and de-dupes.
  *   3. GeckoTerminal active traders — keyless baseline. FREE TIER IS 30 req/min,
@@ -140,6 +142,91 @@ if (process.env.SOLANATRACKER_API_KEY) {
     }
   }
   console.log(`Solana Tracker (high win-rate + top PnL): ${stracker.length}`);
+}
+
+// ── 1b) Solana Tracker — top traders of TRENDING tokens (SAME key) ────────────
+// top-traders/all is a small fixed global pool (~40 after filtering). To reach
+// HUNDREDS on the same free key, harvest the most-profitable traders of each
+// currently-trending token: N tokens × ~25 winning wallets each. Fail-soft —
+// if an endpoint isn't on your plan it logs 0 and the rest of the set stands.
+let sttokens = [];
+if (
+  process.env.SOLANATRACKER_API_KEY &&
+  process.env.USE_ST_TOKEN_TRADERS !== "false"
+) {
+  const key = process.env.SOLANATRACKER_API_KEY;
+  const H = { "x-api-key": key, accept: "application/json" };
+  const wantTokens = Math.max(1, Number(process.env.ST_TREND_TOKENS || 40));
+  const perToken = Math.max(1, Number(process.env.ST_TOKEN_TRADERS || 25));
+  const seen = new Set(stracker); // don't recount wallets we already have
+  // 1) trending token mints — try a few list endpoints; first non-empty wins.
+  const listUrls = [
+    "https://data.solanatracker.io/tokens/trending",
+    "https://data.solanatracker.io/tokens/trending/24h",
+    "https://data.solanatracker.io/tokens/volume",
+  ];
+  let mints = [];
+  for (const url of listUrls) {
+    if (mints.length) break;
+    try {
+      await sleep(1100);
+      const res = await fetch(url, { headers: H });
+      if (!res.ok) {
+        console.warn(`Solana Tracker list failed (${res.status}) ${url}`);
+        continue;
+      }
+      const json = await res.json();
+      const toks = Array.isArray(json) ? json : json?.tokens || json?.data || [];
+      mints = (Array.isArray(toks) ? toks : [])
+        .map(
+          (t) =>
+            t?.token?.mint ||
+            t?.token?.address ||
+            t?.mint ||
+            t?.address ||
+            (typeof t === "string" ? t : null),
+        )
+        .filter((a) => typeof a === "string" && a.length > 20);
+    } catch (e) {
+      console.warn("Solana Tracker list fetch failed:", e.message);
+    }
+  }
+  mints = [...new Set(mints)].slice(0, wantTokens);
+  // 2) top traders of each trending token → their winning wallets
+  for (const mint of mints) {
+    await sleep(1100); // free tier ~1 req/s
+    try {
+      const res = await fetch(
+        `https://data.solanatracker.io/top-traders/${mint}`,
+        { headers: H },
+      );
+      if (res.status === 429) {
+        await sleep(3000);
+        continue;
+      }
+      if (!res.ok) continue;
+      const json = await res.json();
+      const rows = Array.isArray(json)
+        ? json
+        : json?.wallets || json?.traders || json?.data || [];
+      let taken = 0;
+      for (const r of Array.isArray(rows) ? rows : []) {
+        if (taken >= perToken) break;
+        const w = r.wallet || r.address;
+        const pnl = Number(r.total ?? r.realized ?? 0); // top-traders sorted desc
+        if (w && pnl > 0 && !seen.has(w)) {
+          seen.add(w);
+          sttokens.push(w);
+          taken++;
+        }
+      }
+    } catch {
+      /* skip token */
+    }
+  }
+  console.log(
+    `Solana Tracker (trending-token top traders): ${sttokens.length} from ${mints.length} tokens`,
+  );
 }
 
 // ── 2) Birdeye — top traders by PnL, across several timeframes ────────────────
@@ -395,6 +482,7 @@ const map = new Map();
 for (const a of active) if (a) map.set(a, { address: a, label: "Active", segment: "smart" });
 for (const a of gmgn) if (a) map.set(a, { address: a, label: "Smart", segment: "smart" });
 for (const a of bdtop) if (a) map.set(a, { address: a, label: "TopTrader", segment: "smart" });
+for (const a of sttokens) if (a) map.set(a, { address: a, label: "TokenTop", segment: "smart" });
 for (const a of birdeye) if (a) map.set(a, { address: a, label: "TopPnL", segment: "smart" });
 for (const a of stracker) if (a) map.set(a, { address: a, label: "HighWR", segment: "smart" });
 for (const w of manual) if (w?.address) map.set(w.address, w);
@@ -413,7 +501,7 @@ await mkdir("data", { recursive: true }).catch(() => {});
 await writeFile("data/tracked-wallets.json", JSON.stringify(tracked, null, 2));
 console.log(
   `\n✓ Wrote data/tracked-wallets.json — ${tracked.length} wallets ` +
-    `(winrate ${stracker.length}, pnl ${birdeye.length}, toptrader ${bdtop.length}, active ${active.length}, gmgn ${gmgn.length}, manual ${manual.length}).`,
+    `(winrate ${stracker.length}, tokentop ${sttokens.length}, pnl ${birdeye.length}, toptrader ${bdtop.length}, active ${active.length}, gmgn ${gmgn.length}, manual ${manual.length}).`,
 );
 console.log(
   "Restart so the workers pick up the set:  pm2 restart ocolos ocolos-rpc",
